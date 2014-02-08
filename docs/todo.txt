@@ -1,0 +1,5 @@
+
+- Support for other providers
+- Check LDAP vs. UserProfile Fields (Mobile)
+- Make sure password is not stored in value of input
+
