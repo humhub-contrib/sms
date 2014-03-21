@@ -30,7 +30,7 @@ class SmsModule extends CWebModule {
      *
      * @param type $event
      */
-    public function onProfileMenuInit($event) {
+    public static function onProfileMenuInit($event) {
         // Reckon the current controller is a valid profile controller
         // (Needs to implement the ProfileControllerBehavior)
 
