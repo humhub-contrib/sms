@@ -1,0 +1,10 @@
+{
+    "id": "sms",
+    "name": "SMS Gateway",
+    "description": "Allows sms sending on user profiles.",
+    "keywords": ["sms"],
+    "version": "0.4",
+    "humhub": {
+        "minVersion": "0.6"
+    }
+}

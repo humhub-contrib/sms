@@ -9,17 +9,24 @@
  * @since 0.5
  * @author Luke
  */
-class SmsModule extends CWebModule {
+class SmsModule extends HWebModule
+{
 
     /**
      * Inits the Module
      */
-    public function init() {
+    public function init()
+    {
 
         $this->setImport(array(
             'sms.models.*',
             'sms.behaviors.*',
         ));
+    }
+
+    public function getConfigUrl()
+    {
+        return Yii::app()->createUrl('//sms/smsConfig');
     }
 
     /**
@@ -30,7 +37,8 @@ class SmsModule extends CWebModule {
      *
      * @param type $event
      */
-    public static function onProfileMenuInit($event) {
+    public static function onProfileMenuInit($event)
+    {
         // Reckon the current controller is a valid profile controller
         // (Needs to implement the ProfileControllerBehavior)
 
