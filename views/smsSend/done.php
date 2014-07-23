@@ -7,11 +7,19 @@
     <div class="panel-body">
 
 
-        <?php if ($status == 'OK') : ?>
+        <?php if ($status == 'OK') { ?>
 
         <p><?php echo Yii::t('SmsModule.base', 'SMS successfully sent!'); ?></p>
-        
-        <?php else: ?>
+        <?php if($debug) { ?>
+        <p>
+        	<script>
+        	    <?php foreach ($lines as $line) {
+                     echo 'console.log("'.$line.'");';
+                } ?>
+            </script>
+        </p>
+        <?php } 
+		} else { ?>
 <pre>
 Sending SMS to <?php echo $user->profile->mobile; ?>
 
@@ -23,7 +31,7 @@ Network Status: <?php echo $status; ?>
 (0 = Accepted, -1 Invalid API ID, -2 Invalid IP)
 </pre>
 
-        <?php endif; ?>
+        <?php } ?>
 
     </div>
 

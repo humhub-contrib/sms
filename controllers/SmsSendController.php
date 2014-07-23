@@ -37,7 +37,7 @@ class SmsSendController extends Controller {
             echo CActiveForm::validate($form);
             Yii::app()->end();
         }
-
+	
         if (isset($_POST['SmsSendForm'])) {
             $_POST['SmsSendForm'] = Yii::app()->input->stripClean($_POST['SmsSendForm']);
             $form->attributes = $_POST['SmsSendForm'];
@@ -50,18 +50,18 @@ class SmsSendController extends Controller {
                     // Build SMS API Url
                     $url = "http://gateway.any-sms.biz/send_sms.php?id=" . HSetting::Get('username', 'sms');
                     $url .= "&pass=" . HSetting::Get('password', 'sms');
-                    $url .= "&text=" . $form->message;
+                    $url .= "&text=" . urlencode($form->message);
                     $url .= "&nummer=" . $user->profile->mobile;
                     $url .= "&gateway=" . HSetting::Get('gateway', 'sms');
-                    $url .= "&absender=" . str_replace(" ", "", Yii::app()->user->displayName);
-                    ##$url .= "&flash=1";
-                    #$url .= "&test=1";
+                    $url .= "&absender=" . urlencode(Yii::app()->user->displayName);
+                    // $url .= "&flash=1";
+                    // $url .= "&test=1";
+                    $status = $url;
                     // Sent it
 
                     $handle = fopen($url, "rb");
                     $contents = stream_get_contents($handle);
- #                   $contents = 'err:0\n';
-
+ 					// $contents = 'err:0\n';
                     // Fetch Response
                     $lines = explode("\n", $contents);
                     if ($lines[0] == "err:0") {
@@ -75,7 +75,9 @@ class SmsSendController extends Controller {
 
                 $this->render('done', array(
                     'status' => $status,
-                    'user' => $user
+                    'user' => $user,
+                	'lines' => $lines,
+                	'debug'	=> true
                 ));
                 return;
             }

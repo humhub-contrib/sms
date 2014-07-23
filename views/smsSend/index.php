@@ -12,7 +12,7 @@
         ));
         ?>
 
-        <?php echo $form->errorSummary($model); ?>
+        <?php //echo $form->errorSummary($model); ?>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'message'); ?><br/>
@@ -26,10 +26,8 @@
 
         <?php $this->endWidget(); ?>
 
-        
-
         <script>
-            // Stolen at: http://www.scriptiny.com/2012/09/jquery-input-textarea-limiter/
+            // update limiter/ crop limiter text -> Stolen at: http://www.scriptiny.com/2012/09/jquery-input-textarea-limiter/
             (function($) {
                 $.fn.extend({
                     limiter: function(limit, elem) {
