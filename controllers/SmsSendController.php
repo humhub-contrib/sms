@@ -46,7 +46,7 @@ class SmsSendController extends Controller {
             	$sender = Yii::app()->user->displayName;
             	$receiver = $user->profile->mobile;
             	$msg = $form->message;
-            	$provider = new Provider();
+            	$provider = new SmsProvider();
             	$response = $provider->sendSms($sender, $receiver, $msg);
             	 
             	$this->render('done', array(
