@@ -17,12 +17,14 @@ Error message: <?php echo $response['statusMsg']; ?>
         <?php } ?>
     </div>
 </div>
-<?php if($debug) { ?>
-   	<script>
-   		<?php echo 'console.log("Further Information: { ");'; ?>
-   	    <?php foreach ($response['furtherInfo'] as $key => $line) {
-	        echo 'console.log("\t'.$key.': '.$line.'");';
-        } ?>
-        <?php echo 'console.log("}");'; ?>
-    </script>
+<?php if($debug && array_key_exists('furtherInfo', $response)) {
+	$infoString = 'Further Information: { \n';
+	foreach ($response['furtherInfo'] as $key => $line) {
+		$infoString .= '\t'.$key.': '.$line.'\n';
+	}
+	$infoString .= '}';
+?>
+<script>
+   	<?php echo 'console.log("'.$infoString.'");'; ?>
+</script>
 <?php } ?>

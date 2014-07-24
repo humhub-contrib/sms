@@ -20,7 +20,7 @@ class AnySms {
 		$retVal = array();
 		if($handle == false) {
 			$retVal['error'] = true;
-			$retVal['statusMsg'] = 'Could not open connection.';
+			$retVal['statusMsg'] = Yii::t('SmsModule.base', 'Could not open connection to SMS-Provider, please contact an administrator.');
 		}
 		else {
 			$serverResponse = stream_get_contents($handle);
@@ -48,37 +48,36 @@ class AnySms {
 		$retVal = array();
 		$retVal['furtherInfo'] = $values;
 		$retVal['error'] = $values['err'] != 0;
-		
 		switch($values['err']) {
 			case 0:
-				$retVal['statusMsg'] = 'SMS has been successfully sent.';
+				$retVal['statusMsg'] = Yii::t('SmsModule.base', 'SMS has been successfully sent.');
 				break;
 			case -1:
-				$retVal['statusMsg'] = 'Invalid user id and/or password.';
+				$retVal['statusMsg'] = Yii::t('SmsModule.base', 'Invalid user id and/or password. Please contact an administrator to check the module configuration.');
 				break;
 			case -2:
-				$retVal['statusMsg'] = 'Invalid IP address.';
+				$retVal['statusMsg'] = Yii::t('SmsModule.base', 'Invalid IP address.');
 				break;
 			case -3:
-				$retVal['statusMsg'] = 'No sufficient credit available for sub-account.';
+				$retVal['statusMsg'] = Yii::t('SmsModule.base', 'No sufficient credit available for sub-account.');
 				break;
 			case -4:
-				$retVal['statusMsg'] = 'No sufficient credit available for main-account.';
+				$retVal['statusMsg'] = Yii::t('SmsModule.base', 'No sufficient credit available for main-account.');
 				break;
 			case -5:
-				$retVal['statusMsg'] = 'SMS has been rejected/couldn\'t be delivered.';
+				$retVal['statusMsg'] = Yii::t('SmsModule.base', 'SMS has been rejected/couldn\'t be delivered.');
 				break;
 			case -6:
-				$retVal['statusMsg'] = 'Gateway isn\'t available for this network.';
+				$retVal['statusMsg'] = Yii::t('SmsModule.base', 'Gateway isn\'t available for this network.');
 				break;
 			case -9:
-				$retVal['statusMsg'] = 'SMS with identical message text has been sent too often within the last 180 secondsSMS with identical message text has been sent too often within the last 180 seconds.';
+				$retVal['statusMsg'] = Yii::t('SmsModule.base', 'SMS with identical message text has been sent too often within the last 180 secondsSMS with identical message text has been sent too often within the last 180 seconds.');
 				break;
 			case -18:
-				$retVal['statusMsg'] = 'SMS is lacking indication of price (premium number ads).';
+				$retVal['statusMsg'] = Yii::t('SmsModule.base', 'SMS is lacking indication of price (premium number ads).');
 				break;
 			default:
-				$retVal['statusMsg'] = 'An unknown error occurred.';
+				$retVal['statusMsg'] = Yii::t('SmsModule.base', 'An unknown error occurred.');
 				break;
 		}
 		

@@ -17,7 +17,6 @@ class SmsModule extends HWebModule
      */
     public function init()
     {
-
         $this->setImport(array(
             'sms.models.*',
             'sms.behaviors.*',
@@ -26,7 +25,6 @@ class SmsModule extends HWebModule
 
     public function behaviors()
     {
-
         return array(
             'UserModuleBehavior' => array(
                 'class' => 'application.modules_core.user.behaviors.UserModuleBehavior',
@@ -38,8 +36,6 @@ class SmsModule extends HWebModule
     {
         return Yii::app()->createUrl('//sms/smsConfig');
     }
-
-    
     
     /**
      * On AccountNavigationWidget init, this callback will be called
@@ -58,15 +54,12 @@ class SmsModule extends HWebModule
 
         if ($user->isModuleEnabled('sms')) {
 
-#            if ($user->profile->mobile) {
                 $userGuid = $user->guid;
                 $event->sender->addItem(array(
                     'label' => Yii::t('SmsModule.base', 'Send SMS'),
                     'isActive' => (Yii::app()->controller->module && Yii::app()->controller->module->id == 'sms' && Yii::app()->controller->id == 'smsSend' && Yii::app()->controller->action->id == 'index'),
                     'url' => Yii::app()->createUrl('//sms/smsSend/index', array('uguid' => $userGuid))
                 ));
- #           }
         }
     }
-
 }

@@ -6,9 +6,9 @@ class SmsProvider {
 	
 	function __construct() {
 		$providerClass = HSetting::Get('provider', 'sms');
-		try {
+		if(class_exists($providerClass)) {
 			$this->provider = new $providerClass();
-		} catch (Exception $e) {
+		} else {
 			$this->provider = null;
 		}
 	}
@@ -17,7 +17,7 @@ class SmsProvider {
 		$retVal = array();
 		if($this->provider == null) {
 			$retVal['error'] = true;
-			$retVal['statusMsg'] = 'Provider is not initialized.';
+			$retVal['statusMsg'] = Yii::t('SmsModule.base', 'Provider is not initialized. Please contact an administrator to check the module configuration.');
 		} else {
 			$retVal = $this->provider->sendSms($sender, $receiver, $msg);
 		}
