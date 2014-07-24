@@ -16,7 +16,7 @@
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'provider'); ?><br/>
-            <?php echo $form->dropdownList($model, 'provider', array('anysms' => 'Any-SMS.info'), array('class' => 'form-control')); ?>
+            <?php echo $form->dropdownList($model, 'provider', array('AnySms' => 'Any-SMS'), array('class' => 'form-control')); ?>
             <?php echo $form->error($model, 'provider'); ?>
         </div>
         <div class="form-group">
@@ -36,7 +36,6 @@
         </div>
 
         <?php echo CHtml::submitButton(Yii::t('SmsModule.base', 'Save & Test'), array('class' => 'btn btn-primary')); ?>
-
 
     </div>
     <?php $this->endWidget(); ?>

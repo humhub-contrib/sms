@@ -2,37 +2,25 @@
     <div class="panel-heading">
         <?php echo Yii::t('SmsModule.base', 'Send a SMS'); ?>
     </div>
-
-
     <div class="panel-body">
 
-
-        <?php if ($status == 'OK') { ?>
-
-        <p><?php echo Yii::t('SmsModule.base', 'SMS successfully sent!'); ?></p>
-        <?php if($debug) { ?>
-        <p>
-        	<script>
-        	    <?php foreach ($lines as $line) {
-                     echo 'console.log("'.$line.'");';
-                } ?>
-            </script>
-        </p>
-        <?php } 
-		} else { ?>
+		<?php if ($response['error'] == false) { ?>		
+        <p><?php echo $response['statusMsg']; ?></p>
+		<?php } else { ?>
 <pre>
 Sending SMS to <?php echo $user->profile->mobile; ?>
 
 From: <?php echo str_replace(" ", "_", Yii::app()->user->displayName); ?>
 
-Network Status: <?php echo $status; ?>
-
-
-(0 = Accepted, -1 Invalid API ID, -2 Invalid IP)
+Error message: <?php echo $response['statusMsg']; ?>
 </pre>
-
         <?php } ?>
-
     </div>
-
 </div>
+<?php if($debug) { ?>
+   	<script>
+   	    <?php foreach ($response['furtherInfo'] as $key => $line) {
+	        echo 'console.log("'.$key.': '.$line.'");';
+        } ?>
+    </script>
+<?php } ?>

@@ -1,6 +1,6 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-        <?php echo Yii::t('SmsModule.base', 'Send a SMS'); ?>
+        <?php echo Yii::t('SmsModule.base', 'Send a SMS to '); echo Yii::app()->getController()->getUser()->displayName ?>
     </div>
 
     <div class="panel-body">

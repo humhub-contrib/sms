@@ -7,6 +7,7 @@ Yii::app()->moduleManager->register(array(
     'import' => array(
         'application.modules.sms.models.*',
         'application.modules.sms.behaviors.*',
+        'application.modules.sms.components.*',
         'application.modules.sms.*',
     ),
     // Events to Catch 

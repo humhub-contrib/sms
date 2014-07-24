@@ -40,46 +40,21 @@ class SmsSendController extends Controller {
 	
         if (isset($_POST['SmsSendForm'])) {
             $_POST['SmsSendForm'] = Yii::app()->input->stripClean($_POST['SmsSendForm']);
-            $form->attributes = $_POST['SmsSendForm'];
-
+            $form->attributes = $_POST['SmsSendForm'];            
+            
             if ($form->validate()) {
-
-                $status = "None";
-                if (HSetting::Get('gateway', 'sms') != "" && HSetting::Get('username', 'sms') != "") {
-
-                    // Build SMS API Url
-                    $url = "http://gateway.any-sms.biz/send_sms.php?id=" . HSetting::Get('username', 'sms');
-                    $url .= "&pass=" . HSetting::Get('password', 'sms');
-                    $url .= "&text=" . urlencode($form->message);
-                    $url .= "&nummer=" . $user->profile->mobile;
-                    $url .= "&gateway=" . HSetting::Get('gateway', 'sms');
-                    $url .= "&absender=" . urlencode(Yii::app()->user->displayName);
-                    // $url .= "&flash=1";
-                    // $url .= "&test=1";
-                    $status = $url;
-                    // Sent it
-
-                    $handle = fopen($url, "rb");
-                    $contents = stream_get_contents($handle);
- 					// $contents = 'err:0\n';
-                    // Fetch Response
-                    $lines = explode("\n", $contents);
-                    if ($lines[0] == "err:0") {
-                        $status = "OK";
-                    } else {
-                        $status = "Error! " . $lines[0];
-                    }
-                } else {
-                    $status = "Internal Error - Check Module Config!";
-                }
-
-                $this->render('done', array(
-                    'status' => $status,
-                    'user' => $user,
-                	'lines' => $lines,
-                	'debug'	=> true
-                ));
-                return;
+            	$sender = Yii::app()->user->displayName;
+            	$receiver = $user->profile->mobile;
+            	$msg = $form->message;
+            	$provider = new Provider();
+            	$response = $provider->sendSms($sender, $receiver, $msg);
+            	 
+            	$this->render('done', array(
+            			'user' => $user,
+            			'response' => $response,
+            			'debug'	=> true
+            	));
+            	return;
             }
         }
 
