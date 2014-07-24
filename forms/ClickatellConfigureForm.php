@@ -1,18 +1,18 @@
 <?php
 
-class SmsConfigureForm extends CFormModel {
+class ClickatellConfigureForm extends CFormModel {
 
     public $provider;
-    public $username;
-    public $password;
-    public $gateway;
+    public $username_clickatell;
+    public $password_clickatell;
+    public $apiiid_clickatell;
 
     /**
      * Declares the validation rules.
      */
     public function rules() {
         return array(
-            array('provider, username, password, gateway', 'required'),
+            array('provider, username_clickatell, password_clickatell, apiid_clickatell', 'required'),
         );
     }
 

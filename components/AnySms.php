@@ -8,10 +8,10 @@ class AnySms {
 	public $gateway;
 	
 	function __construct() {
-		$this->baseUrl = "http://gateway.any-sms.biz/send_sms.php";
-		$this->id = HSetting::Get('username', 'sms');
-		$this->pass = HSetting::Get('password', 'sms');
-		$this->gateway = HSetting::Get('gateway', 'sms');
+		$this->baseUrl = "https://www.any-sms.biz/gateway/send_sms.php";
+		$this->id = HSetting::Get('username_anysms', 'sms');
+		$this->pass = HSetting::Get('password_anysms', 'sms');
+		$this->gateway = HSetting::Get('gateway_anysms', 'sms');
 	}
 	
 	public function sendSms($sender, $receiver, $msg) {

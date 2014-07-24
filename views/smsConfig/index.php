@@ -7,7 +7,7 @@
 
         <?php
         $form = $this->beginWidget('CActiveForm', array(
-            'id' => 'notes-configure-form',
+            'id' => 'any-sms-configure-form',
             'enableAjaxValidation' => true,
         ));
         ?>
@@ -16,23 +16,23 @@
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'provider'); ?><br/>
-            <?php echo $form->dropdownList($model, 'provider', array('AnySms' => 'Any-SMS'), array('class' => 'form-control')); ?>
+            <?php echo $form->dropdownList($model, 'provider', array('AnySms' => 'Any-SMS', 'Clickatell' => 'Clickatell'), array('class' => 'form-control')); ?>
             <?php echo $form->error($model, 'provider'); ?>
         </div>
         <div class="form-group">
-            <?php echo $form->labelEx($model, 'username'); ?><br/>
-            <?php echo $form->textField($model, 'username', array('class' => 'form-control')); ?>
-            <?php echo $form->error($model, 'username'); ?>
+            <?php echo $form->labelEx($model, 'username_anysms'); ?><br/>
+            <?php echo $form->textField($model, 'username_anysms', array('class' => 'form-control')); ?>
+            <?php echo $form->error($model, 'username_anysms'); ?>
         </div>
         <div class="form-group">
-            <?php echo $form->labelEx($model, 'password'); ?><br/>
-            <?php echo $form->passwordField($model, 'password', array('class' => 'form-control')); ?>
-            <?php echo $form->error($model, 'password'); ?>
+            <?php echo $form->labelEx($model, 'password_anysms'); ?><br/>
+            <?php echo $form->passwordField($model, 'password_anysms', array('class' => 'form-control')); ?>
+            <?php echo $form->error($model, 'password_anysms'); ?>
         </div>
         <div class="form-group">
-            <?php echo $form->labelEx($model, 'gateway'); ?><br/>
-            <?php echo $form->textField($model, 'gateway', array('class' => 'form-control')); ?>
-            <?php echo $form->error($model, 'gateway'); ?>
+            <?php echo $form->labelEx($model, 'gateway_anysms'); ?><br/>
+            <?php echo $form->textField($model, 'gateway_anysms', array('class' => 'form-control')); ?>
+            <?php echo $form->error($model, 'gateway_anysms'); ?>
         </div>
 
         <?php echo CHtml::submitButton(Yii::t('SmsModule.base', 'Save & Test'), array('class' => 'btn btn-primary')); ?>

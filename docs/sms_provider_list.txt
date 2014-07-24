@@ -1,0 +1,3 @@
+http://www.simplesms.at/produkte-sms-gateway
+http://spryng-px.rtrk.nl/produkte/sms-gateway
+https://www.clickatell.com/apis-scripts/apis/http-s/
