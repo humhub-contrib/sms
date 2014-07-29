@@ -8,8 +8,7 @@
         <p><?php echo $response['statusMsg']; ?></p>
 		<?php } else { ?>
 <pre>
-Sending SMS to <?php echo $user->profile->mobile; ?>
-
+Sending SMS to <?php echo $user->profile->mobile; ?> failed
 From: <?php echo str_replace(" ", "_", Yii::app()->user->displayName); ?>
 
 Error message: <?php echo $response['statusMsg']; ?>

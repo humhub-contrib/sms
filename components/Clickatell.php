@@ -48,7 +48,7 @@ class Clickatell {
 		$retVal = array();
 		$retVal['furtherInfo'] = $values;
 		
-		if(array_key_exists('ERR')) {
+		if(array_key_exists('ERR', $values)) {
 			$retVal['error'] = true;
 			$errorInfo = explode(", ", $values['ERR']);
 			if(sizeof($errorInfo) >= 2) {

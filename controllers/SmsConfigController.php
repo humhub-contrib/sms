@@ -40,38 +40,67 @@ class SmsConfigController extends Controller {
     public function actionIndex() {
 
         Yii::import('sms.forms.*');
-
-        $form = new AnySmsConfigureForm;
-
-        // uncomment the following code to enable ajax-based validation
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'any-sms-configure-form') {
-            echo CActiveForm::validate($form);
-            Yii::app()->end();
-        }
-
-        if (isset($_POST['AnySmsConfigureForm'])) {
-            $_POST['AnySmsConfigureForm'] = Yii::app()->input->stripClean($_POST['AnySmsConfigureForm']);
-            $form->attributes = $_POST['AnySmsConfigureForm'];
-
-            if ($form->validate()) {
-
-                $form->provider = HSetting::Set('provider', $form->provider, 'sms');
-                $form->username_anysms = HSetting::Set('username_anysms', $form->username, 'sms');
-                $form->password_anysms = HSetting::Set('password_anysms', $form->password, 'sms');
-                $form->gateway_anysms = HSetting::Set('gateway_anysms', $form->gateway, 'sms');
-
-                $this->redirect(Yii::app()->createUrl('//sms/smsConfig/index'));
-            }
+        
+        $post = $this->getPost(array('SmsProviderConfigureForm', 'AnySmsConfigureForm', 'ClickatellConfigureForm'));
+        
+        if ($post != null) {
+        	$provider = $post['provider'];
+        	        	
+        	// provider changed => just change the provider setting and reload the correct form
+        	if($provider != HSetting::Get('provider', 'sms')) {
+        		$form = new SmsProviderConfigureForm();
+        	} else {
+        		$form = $this->getSmsProviderForm($provider);
+        	}
+        	$form->attributes = $post;
+        	
+        	// uncomment the following code to enable ajax-based validation
+        	if (Yii::app()->getRequest()->getIsAjaxRequest()) {
+        		echo CActiveForm::validate($form);
+        		Yii::app()->end();
+        	}
+        	if ($form->validate()) {
+        		foreach($form->attributeNames() as $attributeName) {
+        			HSetting::Set($attributeName, $form->$attributeName, 'sms');
+        		}
+        		$this->redirect(Yii::app()->createUrl('//sms/smsConfig/index'));
+        	}
         } else {
-            $form->provider = HSetting::Get('provider', 'sms');
-            $form->username_anysms = HSetting::Get('username_anysms', 'sms');
-            $form->password_anysms = HSetting::Get('password_anysms', 'sms');
-            $form->gateway_anysms = HSetting::Get('gateway_anysms', 'sms');
-        }
-
-        $this->render('index', array('model' => $form));
+        	$provider = HSetting::Get('provider', 'sms');
+        	$form = $this->getSmsProviderForm($provider);
+        	foreach($form->attributeNames() as $attributeName) {
+        		$form->$attributeName = HSetting::Get($attributeName, 'sms');
+        	}
+        }     
+        
+        $this->render('index', array('model' => $form));        
+    }   
+    
+    private function getSmsProviderForm($provider = null) {
+    	if($provider != null) {
+    		switch($provider) {
+    			case 'AnySms':
+    				return new AnySmsConfigureForm();
+    				break;
+    			case 'Clickatell':
+    				return new ClickatellConfigureForm();
+    				break;
+    			default:
+    				break;
+    		}
+    	}
+    	return new SmsProviderConfigureForm();
     }
-
+    
+    private function getPost($providerFormClasses = array()) {
+    	
+    	foreach($providerFormClasses as $formClass) {
+    		if (isset($_POST[$formClass])) {
+    			return Yii::app()->input->stripClean($_POST[$formClass]);
+    		}
+    	}
+    	return null;
+    }    
 }
 
 ?>

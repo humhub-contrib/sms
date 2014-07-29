@@ -1,19 +1,18 @@
 <?php
 
-class ClickatellConfigureForm extends CFormModel {
+class ClickatellConfigureForm extends SmsProviderConfigureForm {
 
-    public $provider;
     public $username_clickatell;
     public $password_clickatell;
-    public $apiiid_clickatell;
+    public $apiid_clickatell;
 
     /**
      * Declares the validation rules.
      */
     public function rules() {
-        return array(
-            array('provider, username_clickatell, password_clickatell, apiid_clickatell', 'required'),
-        );
+        return array_merge(parent::rules(), array(
+        	array('username_clickatell, password_clickatell, apiid_clickatell', 'required')
+        ));
     }
 
     /**
@@ -22,8 +21,34 @@ class ClickatellConfigureForm extends CFormModel {
      * the same as its name with the first letter in upper case.
      */
     public function attributeLabels() {
-        return array(
-        );
+        return  array_merge(parent::attributeLabels(), array( 
+        	'username_clickatell' => Yii::t('SmsModule.base', 'Username'),
+        	'password_clickatell' => Yii::t('SmsModule.base', 'Password'),
+        	'apiid_clickatell' => Yii::t('SmsModule.base', 'API ID')
+        ));
+    }
+    /**
+     * You can change the order of the form elements here. First element in array is shown first.
+     * @see SmsProviderConfigureForm::attributeNames()
+     */
+    public function attributeNames() {
+    	return  array_merge(parent::attributeNames(), array('username_clickatell', 'password_clickatell', 'apiid_clickatell'));
+    }
+    
+    public function getActiveFormElement($activeForm = null, $attributeName = null) {
+    	if($activeForm == null || $attributeName == null) {
+    		return null;
+    	}
+    	switch($attributeName) {
+    		case 'username_clickatell' :
+    			return $activeForm->textField($this, 'username_clickatell', array('class' => 'form-control'));
+    		case 'password_clickatell' :
+    			return $activeForm->passwordField($this, 'password_clickatell', array('class' => 'form-control'));
+    		case 'apiid_clickatell' :
+    			return $activeForm->textField($this, 'apiid_clickatell', array('class' => 'form-control'));
+    		default :
+    			return parent::getActiveFormElement($activeForm, $attributeName);
+    	}
     }
 
 }
