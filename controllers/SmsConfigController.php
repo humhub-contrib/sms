@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Description of SmsConfigController
+ * Description of SmsConfigController.
  *
  * @author Luke
  */
@@ -35,7 +35,7 @@ class SmsConfigController extends Controller {
     }
 
     /**
-     * Configuration Action for Super Admins
+     * Configuration Action for Super Admins.
      */
     public function actionIndex() {
 
@@ -59,6 +59,7 @@ class SmsConfigController extends Controller {
         		echo CActiveForm::validate($form);
         		Yii::app()->end();
         	}
+        	
         	if ($form->validate()) {
         		foreach($form->attributeNames() as $attributeName) {
         			HSetting::Set($attributeName, $form->$attributeName, 'sms');
@@ -76,6 +77,12 @@ class SmsConfigController extends Controller {
         $this->render('index', array('model' => $form));        
     }   
     
+    /**
+     * Returns the fitting form for the given sms provider.
+     * 
+     * @param string $provider the currently selected sms provider.
+     * @return AnySmsConfigureForm|ClickatellConfigureForm|SpryngConfigureForm|SmsProviderConfigureForm
+     */
     private function getSmsProviderForm($provider = null) {
     	if($provider != null) {
     		switch($provider) {
@@ -92,6 +99,10 @@ class SmsConfigController extends Controller {
     	return new SmsProviderConfigureForm();
     }
     
+    /**
+     * @param array{string} the provider form classes to accept when set in the post.
+     * @return the received post, if one of the provider forms is posted, else null.
+     */
     private function getPost($providerFormClasses = array()) {
     	
     	foreach($providerFormClasses as $formClass) {

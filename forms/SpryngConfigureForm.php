@@ -16,7 +16,8 @@ class SpryngConfigureForm extends SmsProviderConfigureForm {
      */
     public function rules() {
         return array_merge(parent::rules(), array(
-        	array('username_spryng, password_spryng', 'required')
+        	array('username_spryng, password_spryng', 'required'),
+        	array('route_spryng, service_spryng, allowlong_spryng', 'safe')
         ));
     }
 
@@ -31,7 +32,7 @@ class SpryngConfigureForm extends SmsProviderConfigureForm {
         	'password_spryng' => Yii::t('SmsModule.base', 'Password'),
         	'route_spryng' => Yii::t('SmsModule.base', 'Select the Spryng route (default: BUSINESS)'),
         	'service_spryng' => Yii::t('SmsModule.base', 'Reference tag to create a filter in statistics'),
-        	'allowlong_spryng' => Yii::t('SmsModule.base', 'Allow Messages > 160 characters (default: not allowed)')
+        	'allowlong_spryng' => Yii::t('SmsModule.base', 'Allow Messages > 160 characters (default: not allowed -> currently not supported, as characters are limited by the view)')
         ));
     }
     /**
@@ -42,6 +43,9 @@ class SpryngConfigureForm extends SmsProviderConfigureForm {
     	return  array_merge(parent::attributeNames(), array('username_spryng', 'password_spryng', 'route_spryng', 'service_spryng', 'allowlong_spryng'));
     }
     
+    /**
+     * @see SmsProviderConfigureForm::getActiveFormElement()
+     */
     public function getActiveFormElement($activeForm = null, $attributeName = null) {
     	if($activeForm == null || $attributeName == null) {
     		return null;

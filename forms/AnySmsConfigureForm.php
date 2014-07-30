@@ -1,17 +1,24 @@
 <?php
-
+/**
+ * AnySmsConfigureForm holds the configuration fields available for the AnySms provider.
+ * 
+ * @author Sebastian Stumpf
+ *
+ */
 class AnySmsConfigureForm extends SmsProviderConfigureForm {
 
     public $username_anysms;
     public $password_anysms;
     public $gateway_anysms;
+    public $test_anysms;
 
     /**
      * Declares the validation rules.
      */
     public function rules() {
         return array_merge(parent::rules(), array(
-        	array('username_anysms, password_anysms, gateway_anysms', 'required')
+        	array('username_anysms, password_anysms, gateway_anysms', 'required'),
+        	array('test_anysms', 'safe'),
         ));
     }
 
@@ -24,7 +31,8 @@ class AnySmsConfigureForm extends SmsProviderConfigureForm {
         return  array_merge(parent::attributeLabels(), array( 
         	'username_anysms' => Yii::t('SmsModule.base', 'Username'),
         	'password_anysms' => Yii::t('SmsModule.base', 'Password'),
-        	'gateway_anysms' => Yii::t('SmsModule.base', 'Gateway Number')
+        	'gateway_anysms' => Yii::t('SmsModule.base', 'Gateway Number'),
+        	'test_anysms' => Yii::t('SmsModule.base', 'Test option. Sms are not delivered, but server responses as if the were.')
         ));
     }
     
@@ -33,9 +41,14 @@ class AnySmsConfigureForm extends SmsProviderConfigureForm {
      * @see SmsProviderConfigureForm::attributeNames()
      */
     public function attributeNames() {
-    	return  array_merge(parent::attributeNames(), array('username_anysms', 'password_anysms', 'gateway_anysms'));
+    	return  array_merge(parent::attributeNames(), array('username_anysms', 'password_anysms', 'gateway_anysms', 'test_anysms'));
     }
     
+    /**
+     * Offers a proper ActiveFormField for each form field by its name.
+     * 
+     * @see SmsProviderConfigureForm::getActiveFormElement()
+     */
     public function getActiveFormElement($activeForm = null, $attributeName = null) {
         	if($activeForm == null || $attributeName == null) {
     		return null;
@@ -47,6 +60,8 @@ class AnySmsConfigureForm extends SmsProviderConfigureForm {
     			return $activeForm->passwordField($this, 'password_anysms', array('class' => 'form-control'));
     		case 'gateway_anysms' :
     			return $activeForm->textField($this, 'gateway_anysms', array('class' => 'form-control'));
+    		case 'test_anysms' :
+    			return $activeForm->checkBox($this, 'test_anysms', array('class' => 'form-control'));    			
     		default :
     			return parent::getActiveFormElement($activeForm, $attributeName);
     	}

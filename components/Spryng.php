@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * Spryng implements the interface to the Spryng Sms Provider Api.
+ * 
+ * @see //sms/docs/spryng_http_sms_api_v2.3.pdf
+ * 
+ * @author Sebastian Stumpf
+ *
+ */
 class Spryng {
 	//required
 	public $baseUrl;
@@ -20,24 +27,35 @@ class Spryng {
 		$this->allowlong = HSetting::Get('allowlong_spryng', 'sms');
 	}
 	
+	/**
+	 * @see SmsProvider.sendSms(...)
+	 */
 	public function sendSms($sender, $receiver, $msg) {
 		$retVal = array();
 		
-		$croppedSender = $sender;
+		$spryngSender = $sender;
+		$spryngReceiver = $receiver;
 		if(!ctype_digit($sender)) {
-			$croppedSender = substr($sender, 0, 11);
+			$spryngSender = substr($sender, 0, 11);
+		}
+		if(!ctype_digit($receiver) || substr($receiver, 0, 2) != "00") {
+			$retVal['error'] = true;
+ 			$retVal['statusMsg'] = Yii::t('SmsModule.base', 'Receiver is not properly formatted, has to be in international format, either 00[...], or +[...].');
+		} else {
+			$spryngReceiver = substr($receiver, 1, strlen($receiver)-2);
+			$url = $this->generateUrl($spryngSender, $spryngReceiver, $msg);
+			$handle = fopen($url, "rb");
+			if($handle == false) {
+				$retVal['error'] = true;
+				$retVal['statusMsg'] = Yii::t('SmsModule.base', 'Could not open connection to SMS-Provider, please contact an administrator.');
+			}
+			else {
+				$serverResponse = stream_get_contents($handle);
+				$retVal = $this->interpretResponse($serverResponse);
+			}
 		}		
-		$url = $this->generateUrl($croppedSender, $receiver, $msg);
- 		$handle = fopen($url, "rb");
- 		if($handle == false) {
- 			$retVal['error'] = true;
- 			$retVal['statusMsg'] = Yii::t('SmsModule.base', 'Could not open connection to SMS-Provider, please contact an administrator.');
- 		}
- 		else {
-			$serverResponse = stream_get_contents($handle);
- 			$retVal = $this->interpretResponse($serverResponse);
- 		}
- 		$retVal['sender'] = $croppedSender;
+ 		$retVal['sender'] = $spryngSender;
+ 		$retVal['receiver'] = $spryngReceiver;
  		return $retVal;
 	}
 	
@@ -80,7 +98,7 @@ class Spryng {
 					$retVal['statusMsg'] = Yii::t('SmsModule.base', 'Body too long.');
 					break;
 				case 200:
-					$retVal['statusMsg'] = Yii::t('SmsModule.base', 'Security error, there is probably an error in you account information.');
+					$retVal['statusMsg'] = Yii::t('SmsModule.base', 'Security error. Please contact an administrator to check the module configuration.');
 					break;
 				case 201:
 					$retVal['statusMsg'] = Yii::t('SmsModule.base', 'Unknown route.');

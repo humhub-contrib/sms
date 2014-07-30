@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * Clickatell implements the interface to the Clickatell Sms Provider Api.
+ *
+ * @see //sms/docs/clickatell_http_sms_api.pdf
+ *
+ * @author Sebastian Stumpf
+ *
+ */
 class Clickatell {
 
 	public $baseUrl;
@@ -14,6 +21,9 @@ class Clickatell {
 		$this->pass = HSetting::Get('password_clickatell', 'sms');
 	}
 	
+	/**
+	 * @see SmsProvider.sendSms(...)
+	 */
 	public function sendSms($sender, $receiver, $msg) {
 		$url = $this->generateUrl($sender, $receiver, $msg);
 		$handle = fopen($url, "rb");
@@ -82,7 +92,6 @@ class Clickatell {
 			'to' => urlencode($receiver),
 			'text' => urlencode($msg),
 			'from' => urlencode($sender),
-			'test' => 1
 		));
 		return $url;
 	}

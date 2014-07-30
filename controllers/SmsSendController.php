@@ -1,12 +1,7 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of SmsSendController
+ * Description of SmsSendController.
  *
  * @author Luke
  */

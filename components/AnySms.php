@@ -1,19 +1,31 @@
 <?php
-
+/**
+ * AnySms implements the interface to the Any Sms Provider Api.
+ *
+ * @see //sms/docs/any_sms_gateway_english.pdf
+ *
+ * @author Sebastian Stumpf
+ *
+ */
 class AnySms {
 
 	public $baseUrl;
 	public $id;
 	public $pass;
 	public $gateway;
+	public $test;
 	
 	function __construct() {
 		$this->baseUrl = "https://www.any-sms.biz/gateway/send_sms.php";
 		$this->id = HSetting::Get('username_anysms', 'sms');
 		$this->pass = HSetting::Get('password_anysms', 'sms');
 		$this->gateway = HSetting::Get('gateway_anysms', 'sms');
+		$this->test = HSetting::Get('test_anysms', 'sms');
 	}
 	
+	/**
+	 * @see SmsProvider.sendSms(...)
+	 */
 	public function sendSms($sender, $receiver, $msg) {
 		$url = $this->generateUrl($sender, $receiver, $msg);
 		$handle = fopen($url, "rb");
@@ -90,15 +102,19 @@ class AnySms {
 	private function generateUrl($sender, $receiver, $msg) {
 
 		$url = ($this->baseUrl)."?";
-		$url .= http_build_query(array(
+		$params = array(
 			'id' => $this->id,
 			'pass' => $this->pass,
 			'gateway' => $this->gateway,
 			'text' => urlencode($msg),
 			'nummer' => urlencode($receiver),
 			'absender' => urlencode($sender),
-			'test' => 1
-		));
+		);
+		if(!empty($this->test)) {
+			$params['test'] = $this->test;
+		}
+		$url .= http_build_query($params);
+		
 		return $url;
 	}
 } 

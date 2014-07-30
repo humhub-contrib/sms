@@ -2,9 +2,8 @@
     <div class="panel-heading">
         <?php echo Yii::t('SmsModule.base', 'Send a SMS to '); echo Yii::app()->getController()->getUser()->displayName ?>
     </div>
-
+	
     <div class="panel-body">
-
         <?php
         $form = $this->beginWidget('CActiveForm', array(
             'id' => 'sms-send-form',

@@ -1,11 +1,18 @@
 <?php
 
+/**
+ * Super class for all provider specific ConfigureFormModels.
+ * 
+ * @author Sebastian Stumpf
+ *
+ */
 class SmsProviderConfigureForm extends CFormModel {
-
+	
+	/** The selected provider. **/
     public $provider;
 	
     /**
-     * Declares the validation rules.
+     * @see CModel::rules()
      */
     public function rules() {
         return array(
@@ -13,21 +20,29 @@ class SmsProviderConfigureForm extends CFormModel {
         );
     }
 
-    /**
-     * Declares customized attribute labels.
-     * If not declared here, an attribute would have a label that is
-     * the same as its name with the first letter in upper case.
-     */
+	/**
+	 * @see CModel::attributeLabels()
+	 */
     public function attributeLabels() {
         return array( 
         	'provider' => Yii::t('SmsModule.base', 'Choose Provider')
         );
     }
     
+	/**
+	 * @see CFormModel::attributeNames()
+	 */
     public function attributeNames() {
     	return  array('provider');
     }
     
+    /**
+     * Offers a proper ActiveFormField for each form field by its name.
+     * 
+     * @param HActiveFormElement $activeForm 
+     * @param string $attributeName the attributes name
+     * @return the fitting ActiveFormField
+     */
     public function getActiveFormElement($activeForm = null, $attributeName = null) {
     	if($activeForm == null || $attributeName == null) {
     		return null;
