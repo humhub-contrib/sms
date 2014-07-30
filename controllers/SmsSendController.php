@@ -8,7 +8,34 @@
 class SmsSendController extends Controller {
 
     public $subLayout = "application.modules_core.user.views.profile._layout";
+    /** set debug to true, if you want additional information about the server response put to you browser console via console.log(...) */
+    public $debug = true;
 
+    /**
+     * @return array action filters
+     */
+    public function filters() {
+    	return array(
+    			'accessControl', // perform access control for CRUD operations -> redirect to login if access denied
+    	);
+    }
+    
+    /**
+     * Specifies the access control rules.
+     * This method is used by the 'accessControl' filter.
+     * @return array access control rules
+     */
+    public function accessRules() {
+    	return array(
+    			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+    					'users' => array('@'),
+    			),
+    			array('deny', // deny all users
+    					'users' => array('*'),
+    			),
+    	);
+    }
+    
     /**
      * Add behaviors to this controller
      * @return type
@@ -47,7 +74,7 @@ class SmsSendController extends Controller {
             	$this->render('done', array(
             			'user' => $user,
             			'response' => $response,
-            			'debug'	=> true
+            			'debug'	=> $this->debug
             	));
             	return;
             }
