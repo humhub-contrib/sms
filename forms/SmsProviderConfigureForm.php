@@ -34,7 +34,7 @@ class SmsProviderConfigureForm extends CFormModel {
     	}
     	switch($attributeName) {
     		case 'provider' : 
-    			return $activeForm->dropdownList($this, 'provider', array('AnySms' => 'Any-SMS', 'Clickatell' => 'Clickatell'), array('class' => 'form-control provider-select'));
+    			return $activeForm->dropdownList($this, 'provider', array('AnySms' => 'Any-SMS', 'Clickatell' => 'Clickatell', 'Spryng' => 'Spryng'), array('class' => 'form-control provider-select'));
     		default :
     			return null;
     	}

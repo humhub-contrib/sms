@@ -3,17 +3,14 @@
         <?php echo Yii::t('SmsModule.base', 'Send a SMS'); ?>
     </div>
     <div class="panel-body">
+<pre style="background-color:<?php echo $response['error'] == false ? '#CEF6CE' : '#F6CECE' ?>">
+From:           <?php echo $response['sender']; ?>
 
-		<?php if ($response['error'] == false) { ?>		
-        <p><?php echo $response['statusMsg']; ?></p>
-		<?php } else { ?>
-<pre>
-Sending SMS to <?php echo $user->profile->mobile; ?> failed
-From: <?php echo str_replace(" ", "_", Yii::app()->user->displayName); ?>
+To:             <?php echo $response['receiver']; ?>
 
-Error message: <?php echo $response['statusMsg']; ?>
+Status Message: <?php echo $response['statusMsg'] ?>
+
 </pre>
-        <?php } ?>
     </div>
 </div>
 <?php if($debug && array_key_exists('furtherInfo', $response)) {

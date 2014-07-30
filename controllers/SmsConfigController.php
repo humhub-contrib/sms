@@ -41,7 +41,7 @@ class SmsConfigController extends Controller {
 
         Yii::import('sms.forms.*');
         
-        $post = $this->getPost(array('SmsProviderConfigureForm', 'AnySmsConfigureForm', 'ClickatellConfigureForm'));
+        $post = $this->getPost(array('SmsProviderConfigureForm', 'AnySmsConfigureForm', 'ClickatellConfigureForm', 'SpryngConfigureForm'));
         
         if ($post != null) {
         	$provider = $post['provider'];
@@ -81,10 +81,10 @@ class SmsConfigController extends Controller {
     		switch($provider) {
     			case 'AnySms':
     				return new AnySmsConfigureForm();
-    				break;
     			case 'Clickatell':
     				return new ClickatellConfigureForm();
-    				break;
+    			case 'Spryng':
+    				return new SpryngConfigureForm();
     			default:
     				break;
     		}
