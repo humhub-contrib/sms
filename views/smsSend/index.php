@@ -47,7 +47,7 @@
                 });
             })(jQuery);
             var elem = $("#charactersLeft");
-            $("#SmsSendForm_message").limiter(230, elem);
+            $("#SmsSendForm_message").limiter(160, elem);
         </script>
     </div>
 </div>
