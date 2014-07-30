@@ -29,12 +29,16 @@ class ClickatellConfigureForm extends SmsProviderConfigureForm {
     }
     /**
      * You can change the order of the form elements here. First element in array is shown first.
+     * 
      * @see SmsProviderConfigureForm::attributeNames()
      */
     public function attributeNames() {
     	return  array_merge(parent::attributeNames(), array('username_clickatell', 'password_clickatell', 'apiid_clickatell'));
     }
     
+    /**
+     * @see SmsProviderConfigureForm::getActiveFormElement()
+     */
     public function getActiveFormElement($activeForm = null, $attributeName = null) {
     	if($activeForm == null || $attributeName == null) {
     		return null;
