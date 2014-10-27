@@ -97,7 +97,7 @@ class AnySms {
 	}
 	
 	/**
-	 * Build SMS API Url
+	 * Build SMS API Url. Please not that for AnySms, the text has to be in ISO-8859-15. 
 	 */
 	private function generateUrl($sender, $receiver, $msg) {
 		
@@ -106,9 +106,9 @@ class AnySms {
 				'id' => $this->id,
 				'pass' => $this->pass,
 				'gateway' => $this->gateway,
-				'text' => $msg,
+				'text' => mb_convert_encoding ($msg , "ISO-8859-15", "utf-8"),
 				'nummer' => $receiver,
-				'absender' => $sender,
+				'absender' => mb_convert_encoding ($sender , "ISO-8859-15", "utf-8"),
 		);
 		if(!empty($this->test)) {
 			$params['test'] = $this->test;
@@ -116,6 +116,18 @@ class AnySms {
 		// http_build_query url encodes the parameters
 		$url .= http_build_query($params);
 		return $url;
+	}
+	
+	private function replaceUmlauts($str) {
+		return strtr($str, array(
+        'Ä' => 'Ae',
+        'Ö' => 'Oe',
+        'Ü' => 'Ue',
+        'ä' => 'ae',
+        'ö' => 'oe',
+        'ü' => 'ue',
+        'ß' => 'ss'
+		));
 	}
 } 
 
