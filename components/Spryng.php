@@ -134,9 +134,9 @@ class Spryng {
 			'OPERATION' => 'send',
 			'USERNAME' => $this->user_id,
 			'PASSWORD' => $this->pass,
-			'DESTINATION' => urlencode($receiver),
-			'SENDER' => urlencode($sender),
-			'BODY' => urlencode($msg),
+			'DESTINATION' => $receiver,
+			'SENDER' => $sender,
+			'BODY' => $msg,
 		);
 		// for Spryng maxlength for alphanumeric sender values is 11
 		if(!ctype_digit($sender)) {

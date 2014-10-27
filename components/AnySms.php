@@ -100,21 +100,21 @@ class AnySms {
 	 * Build SMS API Url
 	 */
 	private function generateUrl($sender, $receiver, $msg) {
-
+		
 		$url = ($this->baseUrl)."?";
 		$params = array(
-			'id' => $this->id,
-			'pass' => $this->pass,
-			'gateway' => $this->gateway,
-			'text' => urlencode($msg),
-			'nummer' => urlencode($receiver),
-			'absender' => urlencode($sender),
+				'id' => $this->id,
+				'pass' => $this->pass,
+				'gateway' => $this->gateway,
+				'text' => $msg,
+				'nummer' => $receiver,
+				'absender' => $sender,
 		);
 		if(!empty($this->test)) {
 			$params['test'] = $this->test;
 		}
+		// http_build_query url encodes the parameters
 		$url .= http_build_query($params);
-		
 		return $url;
 	}
 } 

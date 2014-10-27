@@ -89,9 +89,9 @@ class Clickatell {
 			'api_id' => $this->api_id,
 			'user' => $this->user_id,
 			'pass' => $this->pass,
-			'to' => urlencode($receiver),
-			'text' => urlencode($msg),
-			'from' => urlencode($sender),
+			'to' => $receiver,
+			'text' => $msg,
+			'from' => $sender,
 		));
 		return $url;
 	}
