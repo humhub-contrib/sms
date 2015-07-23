@@ -3,8 +3,8 @@
     "name": "SMS Gateway",
     "description": "Allows sms sending on user profiles.",
     "keywords": ["sms"],
-    "version": "0.6",
+    "version": "0.8",
     "humhub": {
-        "minVersion": "0.6"
+        "minVersion": "0.20"
     }
 }
