@@ -4,6 +4,7 @@ namespace humhub\modules\sms;
 
 use Yii;
 use yii\helpers\Url;
+use humhub\modules\user\models\User;
 
 /**
  * SmsModule is the WebModule for the sms message system.
@@ -17,13 +18,19 @@ use yii\helpers\Url;
 class Module extends \humhub\components\Module
 {
 
-    public function behaviors()
+    /**
+     * @inheritdoc
+     */
+    public function getContentContainerTypes()
     {
         return [
-            \humhub\modules\user\behaviors\UserModule::className(),
+            User::className(),
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getConfigUrl()
     {
         return Url::to(['/sms/config']);
