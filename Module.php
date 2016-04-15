@@ -47,7 +47,7 @@ class Module extends \humhub\components\Module
     public static function onProfileMenuInit($event)
     {
         $user = $event->sender->user;
-        if ($user->isModuleEnabled('sms')) {
+        if (Yii::$app->hasModule('sms')) {
             $event->sender->addItem(array(
                 'label' => Yii::t('SmsModule.base', 'Send SMS'),
                 'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'sms' && Yii::$app->controller->id == 'send' && Yii::$app->controller->action->id == 'index'),
