@@ -32,7 +32,7 @@ return array (
   'Security error. Please contact an administrator to check the module configuration.' => '',
   'Select the Spryng route (default: BUSINESS)' => '',
   'Send' => 'Gönder',
-  'Send SMS' => '',
+  'Send SMS' => 'SMS Gönder',
   'Send a SMS' => '',
   'Send a SMS to ' => '',
   'Sender is invalid.' => '',
