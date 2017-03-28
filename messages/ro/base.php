@@ -17,7 +17,7 @@ return array (
   'Invalid user id and/or password. Please contact an administrator to check the module configuration.' => '',
   'No sufficient credit available for main-account.' => '',
   'No sufficient credit available for sub-account.' => '',
-  'Password' => '',
+  'Password' => '패스워드',
   'Provider is not initialized. Please contact an administrator to check the module configuration.' => '',
   'Receiver is invalid.' => '',
   'Receiver is not properly formatted, has to be in international format, either 00[...], or +[...].' => '',
@@ -40,6 +40,6 @@ return array (
   'Test option. Sms are not delivered, but server responses as if the were.' => '',
   'To be able to send a sms to a specific account, make sure the profile field "mobile" exists in the account information.' => '',
   'Unknown route.' => '',
-  'Username' => '',
+  'Username' => '유저네임',
   'Within this configuration you can choose between different sms-providers and configurate these. You need to edit your account information for the chosen provider properly to have the sms-functionality work properly.' => '',
 );

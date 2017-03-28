@@ -40,6 +40,6 @@ return array (
   'Test option. Sms are not delivered, but server responses as if the were.' => '',
   'To be able to send a sms to a specific account, make sure the profile field "mobile" exists in the account information.' => '',
   'Unknown route.' => '',
-  'Username' => '',
+  'Username' => 'Nom d\'usuari',
   'Within this configuration you can choose between different sms-providers and configurate these. You need to edit your account information for the chosen provider properly to have the sms-functionality work properly.' => '',
 );
