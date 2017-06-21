@@ -31,7 +31,7 @@ return array (
   'Save Configuration' => '',
   'Security error. Please contact an administrator to check the module configuration.' => '',
   'Select the Spryng route (default: BUSINESS)' => '',
-  'Send' => '',
+  'Send' => 'Kirim',
   'Send SMS' => '',
   'Send a SMS' => '',
   'Send a SMS to ' => '',
