@@ -1,13 +1,13 @@
 <?php
 return array (
   'API ID' => 'API ID',
-  'Allow Messages > 160 characters (default: not allowed -> currently not supported, as characters are limited by the view)' => 'Üzenetek engedélyezése&gt; 160 karakter (alapértelmezett: nem engedélyezett -&gt; jelenleg nem támogatott, mivel a karakterek a nézet által korlátozottak)',
+  'Allow Messages > 160 characters (default: not allowed -> currently not supported, as characters are limited by the view)' => 'Üzenetek engedélyezése &gt; 160 karakter (alapértelmezett: nem engedélyezett -&gt; jelenleg nem támogatott, mivel a karakterek a nézet által korlátozottak)',
   'An unknown error occurred.' => 'Ismeretlen hiba történt.',
   'Body too long.' => 'A body túl hosszú.',
   'Body too too short.' => 'A body túlságosan rövid.',
   'Characters left:' => 'Hátralévő karakterek:',
   'Choose Provider' => 'Válassz szolgáltatót',
-  'Could not open connection to SMS-Provider, please contact an administrator.' => 'Nem sikerült megnyitni a kapcsolatot az SMS-szolgáltatóval, kérjük, lépj kapcsolatba egy rendszergazdával.',
+  'Could not open connection to SMS-Provider, please contact an administrator.' => 'Nem sikerült megnyitni a kapcsolatot az SMS-szolgáltatóval. Kérjük, lépj kapcsolatba egy rendszergazdával.',
   'Gateway Number' => 'Gateway (átjáró) száma',
   'Gateway isn\'t available for this network.' => 'Nem érhető el gateway (átjáró) ehhez a hálózathoz.',
   'Insufficent credits.' => 'Elégtelen jogosultság.',
@@ -15,8 +15,8 @@ return array (
   'Invalid destination.' => 'Érvénytelen cél.',
   'Invalid sender.' => 'Érvénytelen küldő.',
   'Invalid user id and/or password. Please contact an administrator to check the module configuration.' => 'Érvénytelen felhasználói azonosító és/vagy jelszó. Kérjük, lépj kapcsolatba egy rendszergazdával, hogy ellenőrizze a modul konfigurációját.',
-  'No sufficient credit available for main-account.' => '',
-  'No sufficient credit available for sub-account.' => '',
+  'No sufficient credit available for main-account.' => 'Nincs elegendő kredit a főfiók számára.',
+  'No sufficient credit available for sub-account.' => 'Nincs elegendő kredit az alfiók számára.',
   'Password' => 'Jelszó',
   'Provider is not initialized. Please contact an administrator to check the module configuration.' => 'A szolgáltató nincs inicializálva. Kérjük, lépj kapcsolatba egy rendszergazdával, hogy ellenőrizze a modul konfigurációját.',
   'Receiver is invalid.' => 'A fogadó érvénytelen.',
@@ -27,9 +27,10 @@ return array (
   'SMS has been rejected/couldn\'t be delivered.' => 'Az SMS-t elutasították / nem lehetett elküldeni.',
   'SMS has been successfully sent.' => 'Az SMS sikeresen elküldve.',
   'SMS is lacking indication of price (premium number ads).' => 'Az SMS nem tartalmaz ármegjelölést (prémium szám hirdetések).',
-  'SMS with identical message text has been sent too often within the last 180 secondsSMS with identical message text has been sent too often within the last 180 seconds.' => 'Az azonos üzenettel rendelkező SMS-t túl gyakran küldtük az elmúlt 180 másodpercben.',
+  'SMS with identical message text has been sent too often within the last 180 secondsSMS with identical message text has been sent too often within the last 180 seconds.' => 'Egy azonos üzenettel rendelkező SMS túl gyakran lett elküldve az elmúlt 180 másodpercben.
+Egy azonos üzenettel rendelkező SMS túl gyakran lett elküldve az elmúlt 180 másodpercben.',
   'Save Configuration' => 'Konfiguráció mentése',
-  'Security error. Please contact an administrator to check the module configuration.' => 'Biztonsági hiba. Kérjük, lépjen kapcsolatba egy rendszergazdával, hogy ellenőrizze a modul konfigurációját.',
+  'Security error. Please contact an administrator to check the module configuration.' => 'Biztonsági hiba. Kérjük, lépj kapcsolatba egy rendszergazdával, hogy ellenőrizze a modul konfigurációját.',
   'Select the Spryng route (default: BUSINESS)' => 'Válaszd ki a Spryng útvonalat (alapértelmezett: BUSINESS)',
   'Send' => 'Küldés',
   'Send SMS' => 'SMS küldése',
@@ -38,9 +39,9 @@ return array (
   'Sender is invalid.' => 'Érvénytelen küldő',
   'Technical error.' => 'Technikai hiba',
   'Test option. Sms are not delivered, but server responses as if the were.' => 'Teszt opció. A sms-ek nem kerülnek elküldésre, de a szerver úgy válaszol, mintha igen.',
-  'To be able to send a sms to a specific account, make sure the profile field "mobile" exists in the account information.' => 'Ahhoz, hogy SMS-t küldjön egy megadott fiókhoz, győződj meg arról, hogy a fiókinformációban szerepel a "mobil" profilmező.
+  'To be able to send a sms to a specific account, make sure the profile field "mobile" exists in the account information.' => 'Ahhoz, hogy SMS-t küldhess egy megadott fióknak, győződj meg róla, hogy a fiókinformációban szerepel a "mobil" profilmező.
 .',
   'Unknown route.' => 'Ismeretlen útvonal.',
   'Username' => 'Felhasználónév',
-  'Within this configuration you can choose between different sms-providers and configurate these. You need to edit your account information for the chosen provider properly to have the sms-functionality work properly.' => 'Ebben a konfigurációban választhatsz a különböző SMS-szolgáltatók között, és konfigurálhatod azokat. Az SMS-funkció megfelelő működéséhez pontosan meg kel adnod a kiválasztott szolgáltató fiókadatait.',
+  'Within this configuration you can choose between different sms-providers and configurate these. You need to edit your account information for the chosen provider properly to have the sms-functionality work properly.' => 'Ebben a beállításban választhatsz a különböző SMS-szolgáltatók között, és konfigurálhatod azokat. Az SMS-funkció megfelelő működéséhez pontosan meg kel adnod a kiválasztott szolgáltató fiókadatait.',
 );
