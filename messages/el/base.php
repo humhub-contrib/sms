@@ -31,7 +31,7 @@ return array (
   'Save Configuration' => '',
   'Security error. Please contact an administrator to check the module configuration.' => '',
   'Select the Spryng route (default: BUSINESS)' => '',
-  'Send' => '',
+  'Send' => 'Στείλε',
   'Send SMS' => '',
   'Send a SMS' => '',
   'Send a SMS to ' => '',
@@ -40,6 +40,6 @@ return array (
   'Test option. Sms are not delivered, but server responses as if the were.' => '',
   'To be able to send a sms to a specific account, make sure the profile field "mobile" exists in the account information.' => '',
   'Unknown route.' => '',
-  'Username' => '',
+  'Username' => 'Όνομα χρήστη',
   'Within this configuration you can choose between different sms-providers and configurate these. You need to edit your account information for the chosen provider properly to have the sms-functionality work properly.' => '',
 );
