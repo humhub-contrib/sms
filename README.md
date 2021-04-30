@@ -5,7 +5,7 @@ Adds SMS Send Form to user profiles.
 
 ### Features
 
-- Multiple sms providers: AnySMS, Clickatell, Spryng
+- Multiple sms providers: AnySMS, Clickatell, Spryng, Sms77
 
 
 __Author:__ Sebastian Stumpf, Lucas Bartholemy

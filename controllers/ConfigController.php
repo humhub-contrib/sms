@@ -18,7 +18,7 @@ class ConfigController extends \humhub\modules\admin\components\Controller
      */
     public function actionIndex()
     {
-        $post = $this->getPost(array('SmsProviderConfigureForm', 'AnySmsConfigureForm', 'ClickatellConfigureForm', 'SpryngConfigureForm'));
+        $post = $this->getPost(array('SmsProviderConfigureForm', 'AnySmsConfigureForm', 'ClickatellConfigureForm', 'SpryngConfigureForm', 'Sms77ConfigureForm'));
 
         if ($post != null) {
             $provider = $post['provider'];
@@ -65,6 +65,8 @@ class ConfigController extends \humhub\modules\admin\components\Controller
                     return new \humhub\modules\sms\forms\ClickatellConfigureForm();
                 case 'Spryng':
                     return new \humhub\modules\sms\forms\SpryngConfigureForm();
+                case 'Sms77':
+                    return new \humhub\modules\sms\forms\Sms77ConfigureForm();
                 default:
                     break;
             }
