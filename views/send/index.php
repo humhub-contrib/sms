@@ -1,35 +1,37 @@
 <?php
 
-use yii\helpers\Html;
-use humhub\compat\CActiveForm;
+use humhub\libs\Html;
+use humhub\modules\ui\form\widgets\ActiveForm;
+
+/**
+ * @var $model \humhub\modules\sms\forms\SmsSendForm
+ * @var $user \humhub\modules\user\models\User
+ */
+
 ?>
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <?php
-        echo Yii::t('SmsModule.base', 'Send a SMS to ');
-        echo Html::encode($user->displayName);
-        ?>
+        <?= Yii::t('SmsModule.base', 'Send a SMS to ') . Html::encode($user->displayName); ?>
     </div>
 
     <div class="panel-body">
-        <?php $form = CActiveForm::begin(); ?>
-
-        <?php //echo $form->errorSummary($model);    ?>
+        <?php $form = ActiveForm::begin(); ?>
 
         <div class="form-group">
-            <?php echo $form->labelEx($model, 'message'); ?><br/>
-            <?php echo $form->textArea($model, 'message', array('class' => 'form-control', 'id'=>'sms')); ?>
-            <?php echo $form->error($model, 'message'); ?>
-            <p class="help-block"><?php echo Yii::t('SmsModule.base', 'Characters left:'); ?><span id="charactersLeft">0</span></p>
+            <?= $form->field($model, 'message')->textarea(['id' => 'sms']); ?>
+
+            <p class="help-block">
+                <?= Yii::t('SmsModule.base', 'Characters left:'); ?>
+                <span id="charactersLeft">0</span>
+            </p>
         </div>
 
+        <?= Html::submitButton(Yii::t('SmsModule.base', 'Send'), ['class' => 'btn btn-primary']); ?>
 
-        <?php echo Html::submitButton(Yii::t('SmsModule.base', 'Send'), array('class' => 'btn btn-primary')); ?>
+        <?php $form::end(); ?>
 
-        <?php CActiveForm::end(); ?>
-
-        <script>
+        <script <?= Html::setNonce() ?>>
             // update limiter/ crop limiter text -> Stolen at: http://www.scriptiny.com/2012/09/jquery-input-textarea-limiter/
             (function ($) {
                 $.fn.extend({
@@ -37,6 +39,7 @@ use humhub\compat\CActiveForm;
                         $(this).on("keyup focus", function () {
                             setCount(this, elem);
                         });
+
                         function setCount(src, elem) {
                             var chars = src.value.length;
                             if (chars > limit) {
@@ -45,6 +48,7 @@ use humhub\compat\CActiveForm;
                             }
                             elem.html(limit - chars);
                         }
+
                         setCount($(this)[0], elem);
                     }
                 });

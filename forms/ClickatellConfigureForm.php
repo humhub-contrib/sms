@@ -2,6 +2,8 @@
 
 namespace humhub\modules\sms\forms;
 
+use humhub\modules\ui\form\widgets\ActiveField;
+use humhub\modules\ui\form\widgets\ActiveForm;
 use Yii;
 
 class ClickatellConfigureForm extends SmsProviderConfigureForm
@@ -37,7 +39,7 @@ class ClickatellConfigureForm extends SmsProviderConfigureForm
 
     /**
      * You can change the order of the form elements here. First element in array is shown first.
-     * 
+     *
      * @see SmsProviderConfigureForm::attributeNames()
      */
     public function attributeNames()
@@ -46,20 +48,25 @@ class ClickatellConfigureForm extends SmsProviderConfigureForm
     }
 
     /**
-     * @see SmsProviderConfigureForm::getActiveFormElement()
+     * Offers a proper ActiveFormField for each form field by its name.
+     *
+     * @param ActiveForm $activeForm
+     * @param string $attributeName the attributes name
+     * @return ActiveField | \yii\bootstrap\ActiveField | null
      */
     public function getActiveFormElement($activeForm = null, $attributeName = null)
     {
         if ($activeForm == null || $attributeName == null) {
             return null;
         }
+
         switch ($attributeName) {
             case 'username_clickatell' :
-                return $activeForm->textField($this, 'username_clickatell', array('class' => 'form-control'));
+                return $activeForm->field($this, 'username_clickatell')->textarea();
             case 'password_clickatell' :
-                return $activeForm->passwordField($this, 'password_clickatell', array('class' => 'form-control'));
+                return $activeForm->field($this, 'password_clickatell')->passwordInput();
             case 'apiid_clickatell' :
-                return $activeForm->textField($this, 'apiid_clickatell', array('class' => 'form-control'));
+                return $activeForm->field($this, 'apiid_clickatell')->textInput();
             default :
                 return parent::getActiveFormElement($activeForm, $attributeName);
         }

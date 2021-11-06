@@ -2,11 +2,13 @@
 
 namespace humhub\modules\sms\forms;
 
+use humhub\modules\ui\form\widgets\ActiveField;
+use humhub\modules\ui\form\widgets\ActiveForm;
 use Yii;
 
 /**
  * Super class for all provider specific ConfigureFormModels.
- * 
+ *
  * @author Sebastian Stumpf
  *
  */
@@ -46,19 +48,23 @@ class SmsProviderConfigureForm extends \yii\base\Model
 
     /**
      * Offers a proper ActiveFormField for each form field by its name.
-     * 
-     * @param HActiveFormElement $activeForm 
+     *
+     * @param ActiveForm $activeForm
      * @param string $attributeName the attributes name
-     * @return the fitting ActiveFormField
+     * @return ActiveField | \yii\bootstrap\ActiveField | null
      */
     public function getActiveFormElement($activeForm = null, $attributeName = null)
     {
         if ($activeForm == null || $attributeName == null) {
             return null;
         }
+
         switch ($attributeName) {
             case 'provider' :
-                return $activeForm->dropdownList($this, 'provider', array('AnySms' => 'Any-SMS', 'Clickatell' => 'Clickatell', 'Spryng' => 'Spryng', 'Sms77' => 'Sms77'), array('class' => 'form-control provider-select'));
+                return $activeForm->field($this, 'provider')->dropDownList(
+                    ['AnySms' => 'Any-SMS', 'Clickatell' => 'Clickatell', 'Spryng' => 'Spryng', 'Sms77' => 'Sms77'],
+                    ['class' => 'form-control provider-select']
+                );
             default :
                 return null;
         }
