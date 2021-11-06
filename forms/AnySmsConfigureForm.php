@@ -2,11 +2,13 @@
 
 namespace humhub\modules\sms\forms;
 
+use humhub\modules\ui\form\widgets\ActiveField;
+use humhub\modules\ui\form\widgets\ActiveForm;
 use Yii;
 
 /**
  * AnySmsConfigureForm holds the configuration fields available for the AnySms provider.
- * 
+ *
  * @author Sebastian Stumpf
  *
  */
@@ -55,23 +57,26 @@ class AnySmsConfigureForm extends SmsProviderConfigureForm
 
     /**
      * Offers a proper ActiveFormField for each form field by its name.
-     * 
-     * @see SmsProviderConfigureForm::getActiveFormElement()
+     *
+     * @param ActiveForm $activeForm
+     * @param string $attributeName the attributes name
+     * @return ActiveField | \yii\bootstrap\ActiveField | null
      */
     public function getActiveFormElement($activeForm = null, $attributeName = null)
     {
         if ($activeForm == null || $attributeName == null) {
             return null;
         }
+
         switch ($attributeName) {
             case 'username_anysms' :
-                return $activeForm->textField($this, 'username_anysms', array('class' => 'form-control'));
+                return $activeForm->field($this, 'username_anysms')->textInput();
             case 'password_anysms' :
-                return $activeForm->passwordField($this, 'password_anysms', array('class' => 'form-control'));
+                return $activeForm->field($this, 'password_anysms')->passwordInput();
             case 'gateway_anysms' :
-                return $activeForm->textField($this, 'gateway_anysms', array('class' => 'form-control'));
+                return $activeForm->field($this, 'gateway_anysms')->textInput();
             case 'test_anysms' :
-                return $activeForm->checkBox($this, 'test_anysms', array('class' => 'form-control'));
+                return $activeForm->field($this, 'test_anysms')->checkbox();
             default :
                 return parent::getActiveFormElement($activeForm, $attributeName);
         }

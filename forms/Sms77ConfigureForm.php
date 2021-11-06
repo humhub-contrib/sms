@@ -2,6 +2,8 @@
 
 namespace humhub\modules\sms\forms;
 
+use humhub\modules\ui\form\widgets\ActiveField;
+use humhub\modules\ui\form\widgets\ActiveForm;
 use Yii;
 
 class Sms77ConfigureForm extends SmsProviderConfigureForm
@@ -33,7 +35,7 @@ class Sms77ConfigureForm extends SmsProviderConfigureForm
 
     /**
      * You can change the order of the form elements here. First element in array is shown first.
-     * 
+     *
      * @see SmsProviderConfigureForm::attributeNames()
      */
     public function attributeNames()
@@ -42,7 +44,11 @@ class Sms77ConfigureForm extends SmsProviderConfigureForm
     }
 
     /**
-     * @see SmsProviderConfigureForm::getActiveFormElement()
+     * Offers a proper ActiveFormField for each form field by its name.
+     *
+     * @param ActiveForm $activeForm
+     * @param string $attributeName the attributes name
+     * @return ActiveField | \yii\bootstrap\ActiveField | null
      */
     public function getActiveFormElement($activeForm = null, $attributeName = null)
     {
@@ -51,7 +57,7 @@ class Sms77ConfigureForm extends SmsProviderConfigureForm
         }
         switch ($attributeName) {
             case 'apikey_sms77' :
-                return $activeForm->passwordField($this, 'apikey_sms77', array('class' => 'form-control'));
+                return $activeForm->field($this, 'apikey_sms77')->passwordInput();
             default :
                 return parent::getActiveFormElement($activeForm, $attributeName);
         }
