@@ -7,5 +7,21 @@ name: Upload to HumHub Marketplace
 
 jobs:
   build:
-    uses: humhub/actions/.github/workflows/module-marketplace-upload.yml@main
-    secrets: inherit
+    name: Build and Upload Module Package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with: 
+          path: ${{ github.event.repository.name }}
+
+      - name: Build project
+        run: |
+          zip -r ${{ github.event.repository.name }}.zip ${{ github.event.repository.name }}/
+
+      - name: Upload Package to HumHub Marketplace
+        run: |
+          curl --fail \
+          -F "key=${{secrets.MARKETPLACE_API_KEY}}" \
+          -F "ModuleVersionUpload[zipFile]=@${{ github.event.repository.name }}.zip" \
+          https://api.humhub.com/v1/marketplace/upload?moduleId=${{ github.event.repository.name }}
