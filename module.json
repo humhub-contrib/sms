@@ -3,7 +3,7 @@
     "name": "SMS Gateway",
     "description": "Allows sms sending on user profiles.",
     "keywords": ["sms"],
-    "version": "0.7.3",
+    "version": "0.7.4",
     "homepage": "https://github.com/humhub-contrib/sms",    
     "humhub": {
         "minVersion": "1.3"
