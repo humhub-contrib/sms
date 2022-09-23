@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.7.3 (unreleased)
---------------------
+0.7.3 (September 23, 2022)
+---------------------------
 - Enh #4823: Remove CHTML/CActiveForm usages
 
 0.7.2 (21 May, 2021)
