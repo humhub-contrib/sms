@@ -5,6 +5,7 @@ namespace humhub\modules\sms;
 use Yii;
 use yii\helpers\Url;
 use humhub\modules\user\models\User;
+use humhub\modules\ui\icon\widgets\Icon;
 
 /**
  * SmsModule is the WebModule for the sms message system.
@@ -24,7 +25,7 @@ class Module extends \humhub\components\Module
     public function getContentContainerTypes()
     {
         return [
-            User::className(),
+            User::class,
         ];
     }
 
@@ -47,12 +48,14 @@ class Module extends \humhub\components\Module
     public static function onProfileMenuInit($event)
     {
         $user = $event->sender->user;
+
         if (Yii::$app->hasModule('sms')) {
-            $event->sender->addItem(array(
+        $event->sender->addItem([
                 'label' => Yii::t('SmsModule.base', 'Send SMS'),
+                'icon' => Icon::get('mobile'),
                 'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'sms' && Yii::$app->controller->id == 'send' && Yii::$app->controller->action->id == 'index'),
-                'url' => $user->createUrl('//sms/send')
-            ));
+                'url' => $user->createUrl('//sms/send'),
+            ]);
         }
     }
 
