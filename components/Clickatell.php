@@ -17,16 +17,12 @@ class Clickatell
 {
 
     public $baseUrl;
-    public $api_id;
-    public $user_id;
-    public $pass;
+    public $apiKey;
 
     function __construct()
     {
-        $this->baseUrl = "http://api.clickatell.com/http/sendmsg";
-        $this->api_id = Setting::Get('apiid_clickatell', 'sms');
-        $this->user_id = Setting::Get('username_clickatell', 'sms');
-        $this->pass = Setting::Get('password_clickatell', 'sms');
+        $this->baseUrl = "https://platform.clickatell.com/messages/http/send";
+        $this->apiKey = Setting::Get('apiKey_clickatell', 'sms');
     }
 
     /**
@@ -94,12 +90,9 @@ class Clickatell
 
         $url = ($this->baseUrl) . "?";
         $url .= http_build_query(array(
-            'api_id' => $this->api_id,
-            'user' => $this->user_id,
-            'pass' => $this->pass,
+            'apiKey' => $this->apiKey,
             'to' => $receiver,
-            'text' => $msg,
-            'from' => $sender,
+            'content' => $msg,
         ));
         return $url;
     }
