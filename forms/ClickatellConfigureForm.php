@@ -9,9 +9,7 @@ use Yii;
 class ClickatellConfigureForm extends SmsProviderConfigureForm
 {
 
-    public $username_clickatell;
-    public $password_clickatell;
-    public $apiid_clickatell;
+    public $apiKey_clickatell;
 
     /**
      * Declares the validation rules.
@@ -19,7 +17,7 @@ class ClickatellConfigureForm extends SmsProviderConfigureForm
     public function rules()
     {
         return array_merge(parent::rules(), array(
-            array(['username_clickatell', 'password_clickatell', 'apiid_clickatell'], 'required')
+            array(['apiKey_clickatell'], 'required')
         ));
     }
 
@@ -31,9 +29,7 @@ class ClickatellConfigureForm extends SmsProviderConfigureForm
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), array(
-            'username_clickatell' => Yii::t('SmsModule.base', 'Username'),
-            'password_clickatell' => Yii::t('SmsModule.base', 'Password'),
-            'apiid_clickatell' => Yii::t('SmsModule.base', 'API ID')
+            'apiKey_clickatell' => Yii::t('SmsModule.base', 'API Key')
         ));
     }
 
@@ -44,7 +40,7 @@ class ClickatellConfigureForm extends SmsProviderConfigureForm
      */
     public function attributeNames()
     {
-        return array_merge(parent::attributeNames(), array('username_clickatell', 'password_clickatell', 'apiid_clickatell'));
+        return array_merge(parent::attributeNames(), array('apiKey_clickatell'));
     }
 
     /**
@@ -61,12 +57,8 @@ class ClickatellConfigureForm extends SmsProviderConfigureForm
         }
 
         switch ($attributeName) {
-            case 'username_clickatell' :
-                return $activeForm->field($this, 'username_clickatell')->textarea();
-            case 'password_clickatell' :
-                return $activeForm->field($this, 'password_clickatell')->passwordInput();
-            case 'apiid_clickatell' :
-                return $activeForm->field($this, 'apiid_clickatell')->textInput();
+            case 'apiKey_clickatell' :
+                return $activeForm->field($this, 'apiKey_clickatell')->textInput();
             default :
                 return parent::getActiveFormElement($activeForm, $attributeName);
         }
