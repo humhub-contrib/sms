@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.7.6 (February 2, 2023)
+------------------------
+- Enh #15: Clickatell Integration outdated 
+
 0.7.5 (October 5, 2022)
 ---------------------------
 - Enh #4823: Remove CHTML/CActiveForm usages
