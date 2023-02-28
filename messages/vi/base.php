@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'API ID' => 'API ID',
     'Allow Messages > 160 characters (default: not allowed -> currently not supported, as characters are limited by the view)' => 'Cho phép tin nhắn &gt; 160 ký tự (mặc định: không cho phép -&gt; hiện tại không cho phép, vì các ký tự bị giới hạn hiển thị)',
     'An unknown error occurred.' => 'Lỗi không xác định.',
     'Body too long.' => 'Thân nội dung quá dài.',
@@ -27,6 +26,7 @@ return [
     'SMS Module Configuration' => 'Cấu hình SMS module',
     'Send' => 'Gửi',
     'Username' => 'Tên truy cập',
+    'API Key' => '',
     'API key' => '',
     'SMS has been rejected/couldn\'t be delivered.' => '',
     'SMS has been successfully sent.' => '',

@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'API ID' => 'API ID',
     'Allow Messages > 160 characters (default: not allowed -> currently not supported, as characters are limited by the view)' => 'Dopusti Poruke > 160 znakova (zadano: nije dopušteno -> trenutačno nije podržano, jer znakovi ograničavaju prikaz)',
     'An unknown error occurred.' => 'POjavila se nepoznata greška',
     'Body too long.' => 'Tekst predugačak.',
@@ -44,5 +43,6 @@ SMS s istim tekstom poruke prečesto je poslan u posljednjih 180 sekundi.',
     'Unknown route.' => 'Nepoznata ruta.',
     'Username' => 'Korisničko ime',
     'Within this configuration you can choose between different sms-providers and configurate these. You need to edit your account information for the chosen provider properly to have the sms-functionality work properly.' => 'Unutar ove konfiguracije možete birati između različitih SMS usluga i konfigurirati ih. Morate urediti podatke o vašem računu za odabranog pružatelja pravilno kako bi funkcionalnost sms funkcionirala ispravno.',
+    'API Key' => '',
     'API key' => '',
 ];

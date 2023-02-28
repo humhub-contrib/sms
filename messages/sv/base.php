@@ -12,7 +12,7 @@ return [
     'Send a SMS to ' => 'Skicka ett SMS till',
     'Technical error.' => 'Tekniskt fel.',
     'Username' => 'Användarnamn',
-    'API ID' => '',
+    'API Key' => '',
     'API key' => '',
     'Allow Messages > 160 characters (default: not allowed -> currently not supported, as characters are limited by the view)' => '',
     'An unknown error occurred.' => '',

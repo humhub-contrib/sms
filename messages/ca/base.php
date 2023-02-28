@@ -4,7 +4,7 @@ return [
     'Password' => 'Contrasenya',
     'Send' => 'Envia',
     'Username' => 'Nom d\'usuari',
-    'API ID' => '',
+    'API Key' => '',
     'API key' => '',
     'Allow Messages > 160 characters (default: not allowed -> currently not supported, as characters are limited by the view)' => '',
     'An unknown error occurred.' => '',

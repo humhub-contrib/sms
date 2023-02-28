@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'API ID' => 'API ID',
     'Allow Messages > 160 characters (default: not allowed -> currently not supported, as characters are limited by the view)' => 'Tillat meldinger&gt; 160 tegn (standard: ikke tillatt -&gt; for øyeblikket ikke støttet, da tegn er begrenset av visningen)',
     'An unknown error occurred.' => 'En ukjent feil har oppstått',
     'Body too long.' => 'Bodyen er for lang',
@@ -43,5 +42,6 @@ return [
     'Unknown route.' => 'Ukjent rute',
     'Username' => 'Brukernavn',
     'Within this configuration you can choose between different sms-providers and configurate these. You need to edit your account information for the chosen provider properly to have the sms-functionality work properly.' => 'Innenfor denne konfigurasjonen kan du velge mellom forskjellige sms-leverandører og konfigurere disse. Du må redigere kontoinformasjonen for den valgte leverandøren på riktig måte for å få sms-funksjonaliteten til å fungere skikkelig.',
+    'API Key' => '',
     'API key' => '',
 ];

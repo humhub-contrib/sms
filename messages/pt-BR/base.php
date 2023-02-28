@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'API ID' => 'ID da API',
     'Allow Messages > 160 characters (default: not allowed -> currently not supported, as characters are limited by the view)' => 'Permitir mensagens maiores que 160 caracteres (padrão: não permitido -> atualmente não há suporte, uma vez que os caracteres são limitados pela view)',
     'An unknown error occurred.' => 'Um erro desconhecido ocorreu.',
     'Body too long.' => 'Texto muito longo.',
@@ -43,5 +42,6 @@ return [
     'Unknown route.' => 'Rota desconhecida.',
     'Username' => 'Nome do usuário',
     'Within this configuration you can choose between different sms-providers and configurate these. You need to edit your account information for the chosen provider properly to have the sms-functionality work properly.' => 'Nesta configuração você pode escolher entre diferentes provedores de SMS e configurá-los. Você deve fornecer suas informações de conta de forma adequada para o provedor escolhido para que a funcionalidade SMS funcione corretamente.',
+    'API Key' => '',
     'API key' => '',
 ];

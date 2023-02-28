@@ -18,7 +18,7 @@ return [
     'Send a SMS to ' => 'Enviar SMS a',
     'Technical error.' => 'Erro técnico.',
     'Username' => 'Nome de utilizador',
-    'API ID' => '',
+    'API Key' => '',
     'API key' => '',
     'Allow Messages > 160 characters (default: not allowed -> currently not supported, as characters are limited by the view)' => '',
     'Choose Provider' => '',

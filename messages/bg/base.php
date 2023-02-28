@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'API ID' => 'API ID',
     'Allow Messages > 160 characters (default: not allowed -> currently not supported, as characters are limited by the view)' => 'Позволява съобщения&gt; 160 символа (по подразбиране: не е разрешено -&gt; в момента не се поддържа, тъй като символите са ограничени от изгледа)',
     'An unknown error occurred.' => 'Възникна неизвестна грешка.',
     'Body too long.' => 'Тялото е твърде дълго.',
@@ -43,5 +42,6 @@ return [
     'Unknown route.' => 'Неизвестен маршрут.',
     'Username' => 'Потребителско име',
     'Within this configuration you can choose between different sms-providers and configurate these. You need to edit your account information for the chosen provider properly to have the sms-functionality work properly.' => 'В тази конфигурация можете да избирате между различни доставчици на SMS и да ги конфигурирате. Трябва да редактирате правилно информацията за вашия акаунт за избрания доставчик, за да функционира правилно SMS функционалността.',
+    'API Key' => '',
     'API key' => '',
 ];

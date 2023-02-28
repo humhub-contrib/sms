@@ -1,7 +1,6 @@
 <?php
 
 return [
-    'API ID' => 'API ID',
     'Allow Messages > 160 characters (default: not allowed -> currently not supported, as characters are limited by the view)' => 'Povolit Zprávy > 160 znaků',
     'An unknown error occurred.' => 'Nastala neznámá chyba.',
     'Body too long.' => 'Text je příliš dlouhý.',
@@ -44,5 +43,6 @@ SMS s identickým textem zprávy byl odeslán příliš často během posledníc
     'Unknown route.' => 'Neplatná cesta',
     'Username' => 'Uživatelské jméno',
     'Within this configuration you can choose between different sms-providers and configurate these. You need to edit your account information for the chosen provider properly to have the sms-functionality work properly.' => 'V rámci této konfigurace si můžete vybrat mezi různými poskytovateli sms a konfigurovat je. Potřebujete správně upravit informace o vašem účtu pro vybraného poskytovatele, aby funkčnost sms fungovala správně.',
+    'API Key' => '',
     'API key' => '',
 ];

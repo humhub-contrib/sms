@@ -4,7 +4,7 @@ return [
     'Password' => 'Slaptažodis',
     'Send' => 'Išsiųsti',
     'Username' => 'Vartotojo vardas',
-    'API ID' => '',
+    'API Key' => '',
     'API key' => '',
     'Allow Messages > 160 characters (default: not allowed -> currently not supported, as characters are limited by the view)' => '',
     'An unknown error occurred.' => '',
