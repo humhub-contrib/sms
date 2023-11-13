@@ -6,11 +6,11 @@ use Yii;
 use humhub\models\Setting;
 
 /**
- * Sms77 implements the interface to the Sms77 Sms Provider Api.
+ * Seven implements the interface to the Seven Sms Provider Api.
  *
- * @see https://www.sms77.io/en/docs/gateway/http-api/sms-disptach/
+ * @see https://www.seven.io/en/docs/gateway/http-api/sms-dispatch/
  *
- * @author sms77 e.K.
+ * @author seven communications GmbH & Co. KG
  *
  */
 class Sms77
@@ -21,7 +21,7 @@ class Sms77
 
     function __construct()
     {
-        $this->baseUrl = "https://gateway.sms77.io/api/sms";
+        $this->baseUrl = "https://gateway.seven.io/api/sms";
         $this->apiKey = Setting::Get('apikey_sms77', 'sms');
     }
 
@@ -47,7 +47,7 @@ class Sms77
      * Interpret a string response from the server and convert to a predefined array.
      * @param string $response the server response to a send sms.
      * @return array[string] an array containing following keys: {error, statusMsg, furtherInfo}, where error is true/false, statusMsg the status message and furtherInfo an array with further information
-     *  
+     *
      */
     private function interpretResponse($response)
     {
