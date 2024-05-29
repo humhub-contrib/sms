@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.8.0 (Unreleased)
+------------------------
+- Fix #19: Update module resources path
+
 0.7.6 (February 2, 2023)
 ------------------------
 - Enh #15: Clickatell Integration outdated 
