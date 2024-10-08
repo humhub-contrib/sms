@@ -15,11 +15,10 @@ use humhub\models\Setting;
  */
 class Sms77
 {
-
     public $baseUrl;
     public $apiKey;
 
-    function __construct()
+    public function __construct()
     {
         $this->baseUrl = "https://gateway.seven.io/api/sms";
         $this->apiKey = Setting::Get('apikey_sms77', 'sms');
@@ -32,7 +31,7 @@ class Sms77
     {
         $url = $this->generateUrl($sender, $receiver, $msg);
         $handle = fopen($url, "rb");
-        $retVal = array();
+        $retVal = [];
         if ($handle == false) {
             $retVal['error'] = true;
             $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Could not open connection to SMS-Provider, please contact an administrator.');
@@ -129,17 +128,15 @@ class Sms77
     {
 
         $url = $this->baseUrl . "?";
-        $url .= http_build_query(array(
+        $url .= http_build_query([
             'p' => $this->apiKey,
             'json' => 1,
             'SentWith' => 'HumHub',
             'to' => $receiver,
             'text' => $msg,
             'from' => $sender,
-        ));
+        ]);
         return $url;
     }
 
 }
-
-?>

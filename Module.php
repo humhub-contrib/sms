@@ -18,7 +18,6 @@ use humhub\modules\ui\icon\widgets\Icon;
  */
 class Module extends \humhub\components\Module
 {
-
     /**
      * @inheritdoc
      */
@@ -50,7 +49,7 @@ class Module extends \humhub\components\Module
         $user = $event->sender->user;
 
         if (Yii::$app->hasModule('sms')) {
-        $event->sender->addItem([
+            $event->sender->addItem([
                 'label' => Yii::t('SmsModule.base', 'Send SMS'),
                 'icon' => Icon::get('mobile'),
                 'isActive' => (Yii::$app->controller->module && Yii::$app->controller->module->id == 'sms' && Yii::$app->controller->id == 'send' && Yii::$app->controller->action->id == 'index'),

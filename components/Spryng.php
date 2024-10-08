@@ -7,15 +7,14 @@ use humhub\models\Setting;
 
 /**
  * Spryng implements the interface to the Spryng Sms Provider Api.
- * 
+ *
  * @see //sms/docs/spryng_http_sms_api_v2.3.pdf
- * 
+ *
  * @author Sebastian Stumpf
  *
  */
 class Spryng
 {
-
     //required
     public $baseUrl;
     public $user_id;
@@ -25,7 +24,7 @@ class Spryng
     public $service;
     public $allowlong;
 
-    function __construct()
+    public function __construct()
     {
         $this->baseUrl = "https://www.spryng.nl/send.php";
         $this->user_id = Setting::Get('username_spryng', 'sms');
@@ -40,7 +39,7 @@ class Spryng
      */
     public function sendSms($sender, $receiver, $msg)
     {
-        $retVal = array();
+        $retVal = [];
 
         $spryngSender = $sender;
         $spryngReceiver = $receiver;
@@ -71,12 +70,12 @@ class Spryng
      * Interpret a string response from the server and convert to a predefined array.
      * @param string $response the server response to a send sms.
      * @return array[string] an array containing following keys: {error, statusMsg, furtherInfo}, where error is true/false, statusMsg the status message and furtherInfo an array with further information
-     *  
+     *
      */
     private function interpretResponse($response)
     {
 
-        $retVal = array();
+        $retVal = [];
         $retVal['error'] = $response != 1;
 
         if (empty($response)) {
@@ -127,7 +126,7 @@ class Spryng
             }
         }
 
-        $retVal['furtherInfo'] = array($response => $retVal['statusMsg']);
+        $retVal['furtherInfo'] = [$response => $retVal['statusMsg']];
 
         return $retVal;
     }
@@ -140,14 +139,14 @@ class Spryng
 
         $url = ($this->baseUrl) . "?";
 
-        $params = array(
+        $params = [
             'OPERATION' => 'send',
             'USERNAME' => $this->user_id,
             'PASSWORD' => $this->pass,
             'DESTINATION' => $receiver,
             'SENDER' => $sender,
             'BODY' => $msg,
-        );
+        ];
         // for Spryng maxlength for alphanumeric sender values is 11
         if (!ctype_digit($sender)) {
             $params['SENDER'] = substr($sender, 0, 11);
@@ -168,5 +167,3 @@ class Spryng
     }
 
 }
-
-?>

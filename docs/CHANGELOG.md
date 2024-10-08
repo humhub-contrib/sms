@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.7.7 (Unreleased)
+------------------------
+- Enh #20: Use PHP CS Fixer
+
 0.7.6 (February 2, 2023)
 ------------------------
 - Enh #15: Clickatell Integration outdated 

@@ -14,7 +14,6 @@ use Yii;
  */
 class SmsProviderConfigureForm extends \yii\base\Model
 {
-
     /** The selected provider. * */
     public $provider;
 
@@ -23,9 +22,9 @@ class SmsProviderConfigureForm extends \yii\base\Model
      */
     public function rules()
     {
-        return array(
-            array('provider', 'required'),
-        );
+        return [
+            ['provider', 'required'],
+        ];
     }
 
     /**
@@ -33,9 +32,9 @@ class SmsProviderConfigureForm extends \yii\base\Model
      */
     public function attributeLabels()
     {
-        return array(
-            'provider' => Yii::t('SmsModule.base', 'Choose Provider')
-        );
+        return [
+            'provider' => Yii::t('SmsModule.base', 'Choose Provider'),
+        ];
     }
 
     /**
@@ -43,7 +42,7 @@ class SmsProviderConfigureForm extends \yii\base\Model
      */
     public function attributeNames()
     {
-        return array('provider');
+        return ['provider'];
     }
 
     /**
@@ -60,12 +59,12 @@ class SmsProviderConfigureForm extends \yii\base\Model
         }
 
         switch ($attributeName) {
-            case 'provider' :
+            case 'provider':
                 return $activeForm->field($this, 'provider')->dropDownList(
                     ['AnySms' => 'Any-SMS', 'Clickatell' => 'Clickatell', 'Spryng' => 'Spryng', 'Sms77' => 'Seven'],
-                    ['class' => 'form-control provider-select']
+                    ['class' => 'form-control provider-select'],
                 );
-            default :
+            default:
                 return null;
         }
     }

@@ -15,14 +15,13 @@ use humhub\models\Setting;
  */
 class AnySms
 {
-
     public $baseUrl;
     public $id;
     public $pass;
     public $gateway;
     public $test;
 
-    function __construct()
+    public function __construct()
     {
         $this->baseUrl = "https://www.any-sms.biz/gateway/send_sms.php";
         $this->id = Setting::Get('username_anysms', 'sms');
@@ -38,7 +37,7 @@ class AnySms
     {
         $url = $this->generateUrl($sender, $receiver, $msg);
         $handle = fopen($url, "rb");
-        $retVal = array();
+        $retVal = [];
         if ($handle == false) {
             $retVal['error'] = true;
             $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Could not open connection to SMS-Provider, please contact an administrator.');
@@ -53,12 +52,12 @@ class AnySms
      * Interpret a string response from the server and convert to a predefined array.
      * @param string $response the server response to a send sms.
      * @return array[string] an array containing following keys: {error, statusMsg, furtherInfo}, where error is true/false, statusMsg the status message and furtherInfo an array with further information
-     *  
+     *
      */
     private function interpretResponse($response)
     {
 
-        $values = array();
+        $values = [];
         foreach (explode("\n", $response) as $line) {
             $keyValuePair = explode(":", $line);
             if (sizeof($keyValuePair) >= 2) {
@@ -66,7 +65,7 @@ class AnySms
             }
         }
 
-        $retVal = array();
+        $retVal = [];
         $retVal['furtherInfo'] = $values;
         $retVal['error'] = $values['err'] != 0;
         switch ($values['err']) {
@@ -106,20 +105,20 @@ class AnySms
     }
 
     /**
-     * Build SMS API Url. Please not that for AnySms, the text has to be in ISO-8859-15. 
+     * Build SMS API Url. Please not that for AnySms, the text has to be in ISO-8859-15.
      */
     private function generateUrl($sender, $receiver, $msg)
     {
 
         $url = ($this->baseUrl) . "?";
-        $params = array(
+        $params = [
             'id' => $this->id,
             'pass' => $this->pass,
             'gateway' => $this->gateway,
             'text' => mb_convert_encoding($msg, "ISO-8859-15", "utf-8"),
             'nummer' => $receiver,
             'absender' => mb_convert_encoding($sender, "ISO-8859-15", "utf-8"),
-        );
+        ];
         if (!empty($this->test)) {
             $params['test'] = $this->test;
         }
@@ -130,17 +129,15 @@ class AnySms
 
     private function replaceUmlauts($str)
     {
-        return strtr($str, array(
+        return strtr($str, [
             'Ä' => 'Ae',
             'Ö' => 'Oe',
             'Ü' => 'Ue',
             'ä' => 'ae',
             'ö' => 'oe',
             'ü' => 'ue',
-            'ß' => 'ss'
-        ));
+            'ß' => 'ss',
+        ]);
     }
 
 }
-
-?>
