@@ -8,7 +8,6 @@ use Yii;
 
 class Sms77ConfigureForm extends SmsProviderConfigureForm
 {
-
     public $apikey_sms77;
 
     /**
@@ -16,9 +15,9 @@ class Sms77ConfigureForm extends SmsProviderConfigureForm
      */
     public function rules()
     {
-        return array_merge(parent::rules(), array(
-            array(['apikey_sms77'], 'required')
-        ));
+        return array_merge(parent::rules(), [
+            [['apikey_sms77'], 'required'],
+        ]);
     }
 
     /**
@@ -28,9 +27,9 @@ class Sms77ConfigureForm extends SmsProviderConfigureForm
      */
     public function attributeLabels()
     {
-        return array_merge(parent::attributeLabels(), array(
+        return array_merge(parent::attributeLabels(), [
             'apikey_sms77' => Yii::t('SmsModule.base', 'API key'),
-        ));
+        ]);
     }
 
     /**
@@ -40,7 +39,7 @@ class Sms77ConfigureForm extends SmsProviderConfigureForm
      */
     public function attributeNames()
     {
-        return array_merge(parent::attributeNames(), array('apikey_sms77'));
+        return array_merge(parent::attributeNames(), ['apikey_sms77']);
     }
 
     /**
@@ -56,9 +55,9 @@ class Sms77ConfigureForm extends SmsProviderConfigureForm
             return null;
         }
         switch ($attributeName) {
-            case 'apikey_sms77' :
+            case 'apikey_sms77':
                 return $activeForm->field($this, 'apikey_sms77')->passwordInput();
-            default :
+            default:
                 return parent::getActiveFormElement($activeForm, $attributeName);
         }
     }

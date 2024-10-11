@@ -8,7 +8,6 @@ use Yii;
 
 class ClickatellConfigureForm extends SmsProviderConfigureForm
 {
-
     public $apiKey_clickatell;
 
     /**
@@ -16,9 +15,9 @@ class ClickatellConfigureForm extends SmsProviderConfigureForm
      */
     public function rules()
     {
-        return array_merge(parent::rules(), array(
-            array(['apiKey_clickatell'], 'required')
-        ));
+        return array_merge(parent::rules(), [
+            [['apiKey_clickatell'], 'required'],
+        ]);
     }
 
     /**
@@ -28,9 +27,9 @@ class ClickatellConfigureForm extends SmsProviderConfigureForm
      */
     public function attributeLabels()
     {
-        return array_merge(parent::attributeLabels(), array(
-            'apiKey_clickatell' => Yii::t('SmsModule.base', 'API Key')
-        ));
+        return array_merge(parent::attributeLabels(), [
+            'apiKey_clickatell' => Yii::t('SmsModule.base', 'API Key'),
+        ]);
     }
 
     /**
@@ -40,7 +39,7 @@ class ClickatellConfigureForm extends SmsProviderConfigureForm
      */
     public function attributeNames()
     {
-        return array_merge(parent::attributeNames(), array('apiKey_clickatell'));
+        return array_merge(parent::attributeNames(), ['apiKey_clickatell']);
     }
 
     /**
@@ -57,9 +56,9 @@ class ClickatellConfigureForm extends SmsProviderConfigureForm
         }
 
         switch ($attributeName) {
-            case 'apiKey_clickatell' :
+            case 'apiKey_clickatell':
                 return $activeForm->field($this, 'apiKey_clickatell')->textInput();
-            default :
+            default:
                 return parent::getActiveFormElement($activeForm, $attributeName);
         }
     }
