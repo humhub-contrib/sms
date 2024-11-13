@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.7.7 (Unreleased)
-------------------------
+0.7.7 (November 13, 2024)
+-------------------------
 - Enh #20: Use PHP CS Fixer
 
 0.7.6 (February 2, 2023)
