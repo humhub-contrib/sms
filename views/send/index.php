@@ -31,7 +31,7 @@ use humhub\modules\ui\form\widgets\ActiveForm;
 
         <?php $form::end(); ?>
 
-        <script <?= Html::setNonce() ?>>
+        <script <?= Html::nonce() ?>>
             // update limiter/ crop limiter text -> Stolen at: http://www.scriptiny.com/2012/09/jquery-input-textarea-limiter/
             (function ($) {
                 $.fn.extend({
