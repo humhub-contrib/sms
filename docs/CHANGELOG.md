@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.7.8 (Unreleased)
+-------------------------
+- Enh #22: Fix JavaScript tag attribute "nonce"
+
 0.7.7 (November 13, 2024)
 -------------------------
 - Enh #20: Use PHP CS Fixer

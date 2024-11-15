@@ -29,7 +29,7 @@ use humhub\modules\ui\form\widgets\ActiveForm;
     </div>
 </div>
 
-<script <?= Html::setNonce() ?>>
+<script <?= Html::nonce() ?>>
     // load the proper form if provider selection has changed.
     $('.provider-select').change(function () {
         $('.submit-button').click()
