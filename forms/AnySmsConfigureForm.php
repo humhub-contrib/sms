@@ -2,8 +2,8 @@
 
 namespace humhub\modules\sms\forms;
 
-use humhub\modules\ui\form\widgets\ActiveField;
-use humhub\modules\ui\form\widgets\ActiveForm;
+use humhub\widgets\form\ActiveField;
+use humhub\widgets\form\ActiveForm;
 use Yii;
 
 /**
@@ -59,7 +59,7 @@ class AnySmsConfigureForm extends SmsProviderConfigureForm
      *
      * @param ActiveForm $activeForm
      * @param string $attributeName the attributes name
-     * @return ActiveField | \yii\bootstrap\ActiveField | null
+     * @return ActiveField | \humhub\widgets\form\ActiveField | null
      */
     public function getActiveFormElement($activeForm = null, $attributeName = null)
     {
