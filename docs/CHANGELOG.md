@@ -4,7 +4,7 @@ Changelog
 0.8.0 (Unreleased)
 -------------------------
 - Enh #22: Fix JavaScript tag attribute "nonce"
-- Enh: Migration to Bootstrap 5 for HumHub 1.18
+- Enh #23: Migration to Bootstrap 5 for HumHub 1.18
 
 0.7.7 (November 13, 2024)
 -------------------------
