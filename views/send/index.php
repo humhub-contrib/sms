@@ -1,7 +1,7 @@
 <?php
 
-use humhub\libs\Html;
-use humhub\modules\ui\form\widgets\ActiveForm;
+use humhub\helpers\Html;
+use humhub\widgets\form\ActiveForm;
 
 /**
  * @var $model \humhub\modules\sms\forms\SmsSendForm
@@ -18,10 +18,10 @@ use humhub\modules\ui\form\widgets\ActiveForm;
     <div class="panel-body">
         <?php $form = ActiveForm::begin(); ?>
 
-        <div class="form-group">
+        <div class="mb-3">
             <?= $form->field($model, 'message')->textarea(['id' => 'sms']); ?>
 
-            <p class="help-block">
+            <p class="form-text">
                 <?= Yii::t('SmsModule.base', 'Characters left:'); ?>
                 <span id="charactersLeft">0</span>
             </p>
