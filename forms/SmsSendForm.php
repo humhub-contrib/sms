@@ -4,7 +4,6 @@ namespace humhub\modules\sms\forms;
 
 class SmsSendForm extends \yii\base\Model
 {
-
     public $message;
 
     /**
@@ -12,10 +11,10 @@ class SmsSendForm extends \yii\base\Model
      */
     public function rules()
     {
-        return array(
-            array('message', 'required'),
-            array('message', 'string', 'max' => 230),
-        );
+        return [
+            ['message', 'required'],
+            ['message', 'string', 'max' => 230],
+        ];
     }
 
     /**
@@ -25,8 +24,8 @@ class SmsSendForm extends \yii\base\Model
      */
     public function attributeLabels()
     {
-        return array(
-        );
+        return [
+        ];
     }
 
 }

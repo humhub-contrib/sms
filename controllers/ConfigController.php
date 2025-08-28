@@ -12,13 +12,12 @@ use humhub\models\Setting;
  */
 class ConfigController extends \humhub\modules\admin\components\Controller
 {
-
     /**
      * Configuration Action for Super Admins.
      */
     public function actionIndex()
     {
-        $post = $this->getPost(array('SmsProviderConfigureForm', 'AnySmsConfigureForm', 'ClickatellConfigureForm', 'SpryngConfigureForm', 'Sms77ConfigureForm'));
+        $post = $this->getPost(['SmsProviderConfigureForm', 'AnySmsConfigureForm', 'ClickatellConfigureForm', 'SpryngConfigureForm', 'Sms77ConfigureForm']);
 
         if ($post != null) {
             $provider = $post['provider'];
@@ -46,12 +45,12 @@ class ConfigController extends \humhub\modules\admin\components\Controller
             }
         }
 
-        return $this->render('index', array('model' => $form));
+        return $this->render('index', ['model' => $form]);
     }
 
     /**
      * Returns the fitting form for the given sms provider.
-     * 
+     *
      * @param string $provider the currently selected sms provider.
      * @return AnySmsConfigureForm|ClickatellConfigureForm|SpryngConfigureForm|SmsProviderConfigureForm
      */
@@ -78,7 +77,7 @@ class ConfigController extends \humhub\modules\admin\components\Controller
      * @param array{string} the provider form classes to accept when set in the post.
      * @return the received post, if one of the provider forms is posted, else null.
      */
-    private function getPost($providerFormClasses = array())
+    private function getPost($providerFormClasses = [])
     {
         foreach ($providerFormClasses as $formClass) {
             if (isset($_POST[$formClass])) {
@@ -89,5 +88,3 @@ class ConfigController extends \humhub\modules\admin\components\Controller
     }
 
 }
-
-?>

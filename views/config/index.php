@@ -1,8 +1,8 @@
 <?php
 
-use humhub\libs\Html;
+use humhub\helpers\Html;
 use humhub\modules\sms\forms\SmsProviderConfigureForm;
-use humhub\modules\ui\form\widgets\ActiveForm;
+use humhub\widgets\form\ActiveForm;
 
 /**
  * @var $model SmsProviderConfigureForm
@@ -29,7 +29,7 @@ use humhub\modules\ui\form\widgets\ActiveForm;
     </div>
 </div>
 
-<script <?= Html::setNonce() ?>>
+<script <?= Html::nonce() ?>>
     // load the proper form if provider selection has changed.
     $('.provider-select').change(function () {
         $('.submit-button').click()

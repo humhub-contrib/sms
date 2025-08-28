@@ -11,7 +11,6 @@ use Yii;
  */
 class SendController extends \humhub\modules\content\components\ContentContainerController
 {
-
     /** set debug to true, if you want additional information about the server response put to you browser console via console.log(...) */
     public $debug = true;
 
@@ -27,19 +26,17 @@ class SendController extends \humhub\modules\content\components\ContentContainer
             $provider = new \humhub\modules\sms\components\SmsProvider();
             $response = $provider->sendSms($sender, $receiver, $msg);
 
-            return $this->render('done', array(
-                        'user' => $user,
-                        'response' => $response,
-                        'debug' => $this->debug
-            ));
+            return $this->render('done', [
+                'user' => $user,
+                'response' => $response,
+                'debug' => $this->debug,
+            ]);
         }
 
-        return $this->render('index', array(
-                    'model' => $form,
-                    'user' => $user
-        ));
+        return $this->render('index', [
+            'model' => $form,
+            'user' => $user,
+        ]);
     }
 
 }
-
-?>

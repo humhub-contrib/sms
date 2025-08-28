@@ -8,20 +8,19 @@ use humhub\models\Setting;
 /**
  * SmsProvider is the general class to use to send a sms via the set provider in the settings.
  * The request to send a sms is redirected to the specific provider class instance initialized from the settings (provider : sms) in the constructor.
- * 
+ *
  * @author Sebastian Stumpf
  *
  */
 class SmsProvider
 {
-
     /** The specific provider, the incoming requests will be redirected to. * */
     public $provider;
 
     /**
      * Constructor initialized the specific provider from the settings.
      */
-    function __construct()
+    public function __construct()
     {
         $providerClass = 'humhub\\modules\\sms\\components\\' . Setting::Get('provider', 'sms');
 
@@ -35,7 +34,7 @@ class SmsProvider
     /**
      * Send a sms from sender to receiver with the initialized specific provider.
      * If $sender or $receiver are changed in the specific provider, overwrite them in its return value.
-     * 
+     *
      * @param numeric $sender the sender, alphanumeric
      * @param alphanumeric $receiver the receiver, will be normalized with normalize()
      * @param string $msg the message
@@ -44,15 +43,15 @@ class SmsProvider
     public function sendSms($sender, $receiver, $msg)
     {
 
-        $retVal = array();
+        $retVal = [];
         $normReceiver = $this->normalize($receiver);
         if ($this->provider == null) {
             $retVal['error'] = true;
             $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Provider is not initialized. Please contact an administrator to check the module configuration.');
-        } else if (empty($sender)) {
+        } elseif (empty($sender)) {
             $retVal['error'] = true;
             $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Sender is invalid.');
-        } else if (empty($normReceiver) || strlen($normReceiver) < 2) {
+        } elseif (empty($normReceiver) || strlen($normReceiver) < 2) {
             $retVal['error'] = true;
             $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Receiver is invalid.');
         } else {
@@ -71,14 +70,14 @@ class SmsProvider
     /**
      * This function normalizes a given number by removing all non digits and replacing the first '+' (international number) with 00.
      * Example:
-     * 
+     *
      * d := digit
      * c := any non numeric character
      * p := + character
-     * 
+     *
      * p(d*c*)* -> 00d*
      * (d*c*)* -> d*
-     * 
+     *
      * @param string $number
      * @return string
      */
@@ -94,5 +93,3 @@ class SmsProvider
     }
 
 }
-
-?>

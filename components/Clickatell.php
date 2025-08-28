@@ -15,11 +15,10 @@ use humhub\models\Setting;
  */
 class Clickatell
 {
-
     public $baseUrl;
     public $apiKey;
 
-    function __construct()
+    public function __construct()
     {
         $this->baseUrl = "https://platform.clickatell.com/messages/http/send";
         $this->apiKey = Setting::Get('apiKey_clickatell', 'sms');
@@ -32,7 +31,7 @@ class Clickatell
     {
         $url = $this->generateUrl($sender, $receiver, $msg);
         $handle = fopen($url, "rb");
-        $retVal = array();
+        $retVal = [];
         if ($handle == false) {
             $retVal['error'] = true;
             $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Could not open connection to SMS-Provider, please contact an administrator.');
@@ -47,12 +46,12 @@ class Clickatell
      * Interpret a string response from the server and convert to a predefined array.
      * @param string $response the server response to a send sms.
      * @return array[string] an array containing following keys: {error, statusMsg, furtherInfo}, where error is true/false, statusMsg the status message and furtherInfo an array with further information
-     *  
+     *
      */
     private function interpretResponse($response)
     {
 
-        $values = array();
+        $values = [];
         foreach (explode("\n", $response) as $line) {
             $keyValuePair = explode(":", $line);
             if (sizeof($keyValuePair) >= 2) {
@@ -60,7 +59,7 @@ class Clickatell
             }
         }
 
-        $retVal = array();
+        $retVal = [];
         $retVal['furtherInfo'] = $values;
 
         if (array_key_exists('ERR', $values)) {
@@ -71,7 +70,7 @@ class Clickatell
             } else {
                 $retVal['statusMsg'] = $values['ERR'];
             }
-        } else if (array_key_exists('ID')) {
+        } elseif (array_key_exists('ID')) {
             $retVal['error'] = false;
             $retVal['statusMsg'] = Yii::t('SmsModule.base', 'SMS has been successfully sent.');
         } else {
@@ -89,14 +88,12 @@ class Clickatell
     {
 
         $url = ($this->baseUrl) . "?";
-        $url .= http_build_query(array(
+        $url .= http_build_query([
             'apiKey' => $this->apiKey,
             'to' => $receiver,
             'content' => $msg,
-        ));
+        ]);
         return $url;
     }
 
 }
-
-?>

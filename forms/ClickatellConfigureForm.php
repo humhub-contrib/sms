@@ -2,13 +2,12 @@
 
 namespace humhub\modules\sms\forms;
 
-use humhub\modules\ui\form\widgets\ActiveField;
-use humhub\modules\ui\form\widgets\ActiveForm;
+use humhub\widgets\form\ActiveField;
+use humhub\widgets\form\ActiveForm;
 use Yii;
 
 class ClickatellConfigureForm extends SmsProviderConfigureForm
 {
-
     public $apiKey_clickatell;
 
     /**
@@ -16,9 +15,9 @@ class ClickatellConfigureForm extends SmsProviderConfigureForm
      */
     public function rules()
     {
-        return array_merge(parent::rules(), array(
-            array(['apiKey_clickatell'], 'required')
-        ));
+        return array_merge(parent::rules(), [
+            [['apiKey_clickatell'], 'required'],
+        ]);
     }
 
     /**
@@ -28,9 +27,9 @@ class ClickatellConfigureForm extends SmsProviderConfigureForm
      */
     public function attributeLabels()
     {
-        return array_merge(parent::attributeLabels(), array(
-            'apiKey_clickatell' => Yii::t('SmsModule.base', 'API Key')
-        ));
+        return array_merge(parent::attributeLabels(), [
+            'apiKey_clickatell' => Yii::t('SmsModule.base', 'API Key'),
+        ]);
     }
 
     /**
@@ -40,7 +39,7 @@ class ClickatellConfigureForm extends SmsProviderConfigureForm
      */
     public function attributeNames()
     {
-        return array_merge(parent::attributeNames(), array('apiKey_clickatell'));
+        return array_merge(parent::attributeNames(), ['apiKey_clickatell']);
     }
 
     /**
@@ -48,7 +47,7 @@ class ClickatellConfigureForm extends SmsProviderConfigureForm
      *
      * @param ActiveForm $activeForm
      * @param string $attributeName the attributes name
-     * @return ActiveField | \yii\bootstrap\ActiveField | null
+     * @return ActiveField | \humhub\widgets\form\ActiveField | null
      */
     public function getActiveFormElement($activeForm = null, $attributeName = null)
     {
@@ -57,9 +56,9 @@ class ClickatellConfigureForm extends SmsProviderConfigureForm
         }
 
         switch ($attributeName) {
-            case 'apiKey_clickatell' :
+            case 'apiKey_clickatell':
                 return $activeForm->field($this, 'apiKey_clickatell')->textInput();
-            default :
+            default:
                 return parent::getActiveFormElement($activeForm, $attributeName);
         }
     }

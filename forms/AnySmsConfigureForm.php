@@ -2,8 +2,8 @@
 
 namespace humhub\modules\sms\forms;
 
-use humhub\modules\ui\form\widgets\ActiveField;
-use humhub\modules\ui\form\widgets\ActiveForm;
+use humhub\widgets\form\ActiveField;
+use humhub\widgets\form\ActiveForm;
 use Yii;
 
 /**
@@ -14,7 +14,6 @@ use Yii;
  */
 class AnySmsConfigureForm extends SmsProviderConfigureForm
 {
-
     public $username_anysms;
     public $password_anysms;
     public $gateway_anysms;
@@ -25,10 +24,10 @@ class AnySmsConfigureForm extends SmsProviderConfigureForm
      */
     public function rules()
     {
-        return array_merge(parent::rules(), array(
-            array(['username_anysms', 'password_anysms', 'gateway_anysms'], 'required'),
-            array('test_anysms', 'safe'),
-        ));
+        return array_merge(parent::rules(), [
+            [['username_anysms', 'password_anysms', 'gateway_anysms'], 'required'],
+            ['test_anysms', 'safe'],
+        ]);
     }
 
     /**
@@ -38,12 +37,12 @@ class AnySmsConfigureForm extends SmsProviderConfigureForm
      */
     public function attributeLabels()
     {
-        return array_merge(parent::attributeLabels(), array(
+        return array_merge(parent::attributeLabels(), [
             'username_anysms' => Yii::t('SmsModule.base', 'Username'),
             'password_anysms' => Yii::t('SmsModule.base', 'Password'),
             'gateway_anysms' => Yii::t('SmsModule.base', 'Gateway Number'),
-            'test_anysms' => Yii::t('SmsModule.base', 'Test option. Sms are not delivered, but server responses as if the were.')
-        ));
+            'test_anysms' => Yii::t('SmsModule.base', 'Test option. Sms are not delivered, but server responses as if the were.'),
+        ]);
     }
 
     /**
@@ -52,7 +51,7 @@ class AnySmsConfigureForm extends SmsProviderConfigureForm
      */
     public function attributeNames()
     {
-        return array_merge(parent::attributeNames(), array('username_anysms', 'password_anysms', 'gateway_anysms', 'test_anysms'));
+        return array_merge(parent::attributeNames(), ['username_anysms', 'password_anysms', 'gateway_anysms', 'test_anysms']);
     }
 
     /**
@@ -60,7 +59,7 @@ class AnySmsConfigureForm extends SmsProviderConfigureForm
      *
      * @param ActiveForm $activeForm
      * @param string $attributeName the attributes name
-     * @return ActiveField | \yii\bootstrap\ActiveField | null
+     * @return ActiveField | \humhub\widgets\form\ActiveField | null
      */
     public function getActiveFormElement($activeForm = null, $attributeName = null)
     {
@@ -69,15 +68,15 @@ class AnySmsConfigureForm extends SmsProviderConfigureForm
         }
 
         switch ($attributeName) {
-            case 'username_anysms' :
+            case 'username_anysms':
                 return $activeForm->field($this, 'username_anysms')->textInput();
-            case 'password_anysms' :
+            case 'password_anysms':
                 return $activeForm->field($this, 'password_anysms')->passwordInput();
-            case 'gateway_anysms' :
+            case 'gateway_anysms':
                 return $activeForm->field($this, 'gateway_anysms')->textInput();
-            case 'test_anysms' :
+            case 'test_anysms':
                 return $activeForm->field($this, 'test_anysms')->checkbox();
-            default :
+            default:
                 return parent::getActiveFormElement($activeForm, $attributeName);
         }
     }

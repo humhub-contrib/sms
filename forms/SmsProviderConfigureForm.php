@@ -2,8 +2,8 @@
 
 namespace humhub\modules\sms\forms;
 
-use humhub\modules\ui\form\widgets\ActiveField;
-use humhub\modules\ui\form\widgets\ActiveForm;
+use humhub\widgets\form\ActiveField;
+use humhub\widgets\form\ActiveForm;
 use Yii;
 
 /**
@@ -14,7 +14,6 @@ use Yii;
  */
 class SmsProviderConfigureForm extends \yii\base\Model
 {
-
     /** The selected provider. * */
     public $provider;
 
@@ -23,9 +22,9 @@ class SmsProviderConfigureForm extends \yii\base\Model
      */
     public function rules()
     {
-        return array(
-            array('provider', 'required'),
-        );
+        return [
+            ['provider', 'required'],
+        ];
     }
 
     /**
@@ -33,9 +32,9 @@ class SmsProviderConfigureForm extends \yii\base\Model
      */
     public function attributeLabels()
     {
-        return array(
-            'provider' => Yii::t('SmsModule.base', 'Choose Provider')
-        );
+        return [
+            'provider' => Yii::t('SmsModule.base', 'Choose Provider'),
+        ];
     }
 
     /**
@@ -43,7 +42,7 @@ class SmsProviderConfigureForm extends \yii\base\Model
      */
     public function attributeNames()
     {
-        return array('provider');
+        return ['provider'];
     }
 
     /**
@@ -51,7 +50,7 @@ class SmsProviderConfigureForm extends \yii\base\Model
      *
      * @param ActiveForm $activeForm
      * @param string $attributeName the attributes name
-     * @return ActiveField | \yii\bootstrap\ActiveField | null
+     * @return ActiveField | \humhub\widgets\form\ActiveField | null
      */
     public function getActiveFormElement($activeForm = null, $attributeName = null)
     {
@@ -60,12 +59,12 @@ class SmsProviderConfigureForm extends \yii\base\Model
         }
 
         switch ($attributeName) {
-            case 'provider' :
+            case 'provider':
                 return $activeForm->field($this, 'provider')->dropDownList(
                     ['AnySms' => 'Any-SMS', 'Clickatell' => 'Clickatell', 'Spryng' => 'Spryng', 'Sms77' => 'Seven'],
-                    ['class' => 'form-control provider-select']
+                    ['class' => 'form-control provider-select'],
                 );
-            default :
+            default:
                 return null;
         }
     }
