@@ -104,8 +104,8 @@ class Sms77
         $i = 1;
         foreach ($json['messages'] as $message) {
             foreach ($message as $key => $value) {
-                $json['message_' . $i . '_' . $key] =
-                    is_array($value) ? implode(',', $value) : $value;
+                $json['message_' . $i . '_' . $key]
+                    = is_array($value) ? implode(',', $value) : $value;
             }
 
             $i++;
