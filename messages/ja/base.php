@@ -1,5 +1,5 @@
 <?php
-return array (
+return [
   'API Key' => 'APIキー',
   'API key' => 'APIキー',
   'Allow Messages > 160 characters (default: not allowed -> currently not supported, as characters are limited by the view)' => 'メッセージを許可 → 160文字 (デフォルト：許可されていません → ビューによって文字数が制限されている為、現在サポートされていません)',
@@ -39,8 +39,8 @@ return array (
   'Sender is invalid.' => '送信者が無効です。',
   'Technical error.' => '技術的なエラー。',
   'Test option. Sms are not delivered, but server responses as if the were.' => 'テストオプション。SMS は配信されませんがサーバーは配信されたかのように応答します。',
-  'To be able to send a sms to a specific account, make sure the profile field "mobile" exists in the account information.' => '特定のアカウントに SMSを送信できるようにするには、アカウント情報にプロファイル フィールド "mobile" が存在する事を確認してください。',
+  'To be able to send a sms to a specific account, make sure the profile field "mobile" exists in the account information.' => '特定のアカウントに SMSを送信できるようにするには、アカウント情報にプロフィール フィールド "mobile" が存在する事を確認してください。',
   'Unknown route.' => 'ルートが不明です。',
   'Username' => 'ユーザー名',
   'Within this configuration you can choose between different sms-providers and configurate these. You need to edit your account information for the chosen provider properly to have the sms-functionality work properly.' => 'この構成内で、様々な sms-providers から選択して、これらを構成できます。SMS機能を適切に動作させるには、選択したプロバイダーのアカウント情報を適切に編集する必要があります。',
-);
+];
