@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.8.1 (Unreleased)
+-----------------------
+- Fix #27: Replace deprecated module setting methods
+
 0.8.0 (August 28, 2025)
 -----------------------
 - Fix #19: Update module resources path

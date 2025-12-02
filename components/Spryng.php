@@ -2,8 +2,8 @@
 
 namespace humhub\modules\sms\components;
 
+use humhub\components\SettingsManager;
 use Yii;
-use humhub\models\Setting;
 
 /**
  * Spryng implements the interface to the Spryng Sms Provider Api.
@@ -27,11 +27,15 @@ class Spryng
     public function __construct()
     {
         $this->baseUrl = "https://www.spryng.nl/send.php";
-        $this->user_id = Setting::Get('username_spryng', 'sms');
-        $this->pass = Setting::Get('password_spryng', 'sms');
-        $this->route = Setting::Get('route_spryng', 'sms');
-        $this->service = Setting::Get('service_spryng', 'sms');
-        $this->allowlong = Setting::Get('allowlong_spryng', 'sms');
+
+        /* @var SettingsManager $settings */
+        $settings = Yii::$app->getModule('sms')->settings;
+
+        $this->user_id = $settings->get('username_spryng');
+        $this->pass = $settings->get('password_spryng');
+        $this->route = $settings->get('route_spryng');
+        $this->service = $settings->get('service_spryng');
+        $this->allowlong = $settings->get('allowlong_spryng');
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace humhub\modules\sms\components;
 
 use Yii;
-use humhub\models\Setting;
 
 /**
  * Clickatell implements the interface to the Clickatell Sms Provider Api.
@@ -21,7 +20,7 @@ class Clickatell
     public function __construct()
     {
         $this->baseUrl = "https://platform.clickatell.com/messages/http/send";
-        $this->apiKey = Setting::Get('apiKey_clickatell', 'sms');
+        $this->apiKey = Yii::$app->getModule('sms')->settings->get('apiKey_clickatell');
     }
 
     /**

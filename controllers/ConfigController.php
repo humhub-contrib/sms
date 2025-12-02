@@ -2,8 +2,8 @@
 
 namespace humhub\modules\sms\controllers;
 
+use humhub\components\SettingsManager;
 use Yii;
-use humhub\models\Setting;
 
 /**
  * Description of SmsConfigController.
@@ -19,12 +19,15 @@ class ConfigController extends \humhub\modules\admin\components\Controller
     {
         $post = $this->getPost(['SmsProviderConfigureForm', 'AnySmsConfigureForm', 'ClickatellConfigureForm', 'SpryngConfigureForm', 'Sms77ConfigureForm']);
 
+        /* @var SettingsManager $settings */
+        $settings = Yii::$app->getModule('sms')->settings;
+
         if ($post != null) {
             $provider = $post['provider'];
             $form = $this->getSmsProviderForm($provider);
 
             // provider changed => just change the provider setting and reload the correct form
-            if ($provider != Setting::Get('provider', 'sms')) {
+            if ($provider != $settings->get('provider')) {
                 $form = new \humhub\modules\sms\forms\SmsProviderConfigureForm();
             } else {
                 $form = $this->getSmsProviderForm($provider);
@@ -33,15 +36,15 @@ class ConfigController extends \humhub\modules\admin\components\Controller
             $form->setAttributes($post);
             if ($form->validate()) {
                 foreach ($form->attributeNames() as $attributeName) {
-                    Setting::Set($attributeName, $form->$attributeName, 'sms');
+                    $settings->set($attributeName, $form->$attributeName);
                 }
                 return $this->redirect(['/sms/config']);
             }
         } else {
-            $provider = Setting::Get('provider', 'sms');
+            $provider = $settings->get('provider');
             $form = $this->getSmsProviderForm($provider);
             foreach ($form->attributeNames() as $attributeName) {
-                $form->$attributeName = Setting::Get($attributeName, 'sms');
+                $form->$attributeName = $settings->get($attributeName);
             }
         }
 

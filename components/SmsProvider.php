@@ -3,7 +3,6 @@
 namespace humhub\modules\sms\components;
 
 use Yii;
-use humhub\models\Setting;
 
 /**
  * SmsProvider is the general class to use to send a sms via the set provider in the settings.
@@ -22,7 +21,7 @@ class SmsProvider
      */
     public function __construct()
     {
-        $providerClass = 'humhub\\modules\\sms\\components\\' . Setting::Get('provider', 'sms');
+        $providerClass = 'humhub\\modules\\sms\\components\\' . Yii::$app->getModule('sms')->settings->get('provider');
 
         if (class_exists($providerClass)) {
             $this->provider = new $providerClass();

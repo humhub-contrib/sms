@@ -2,8 +2,8 @@
 
 namespace humhub\modules\sms\components;
 
+use humhub\components\SettingsManager;
 use Yii;
-use humhub\models\Setting;
 
 /**
  * AnySms implements the interface to the Any Sms Provider Api.
@@ -24,10 +24,14 @@ class AnySms
     public function __construct()
     {
         $this->baseUrl = "https://www.any-sms.biz/gateway/send_sms.php";
-        $this->id = Setting::Get('username_anysms', 'sms');
-        $this->pass = Setting::Get('password_anysms', 'sms');
-        $this->gateway = Setting::Get('gateway_anysms', 'sms');
-        $this->test = Setting::Get('test_anysms', 'sms');
+
+        /* @var SettingsManager $settings */
+        $settings = Yii::$app->getModule('sms')->settings;
+
+        $this->id = $settings->get('username_anysms');
+        $this->pass = $settings->get('password_anysms');
+        $this->gateway = $settings->get('gateway_anysms');
+        $this->test = $settings->get('test_anysms');
     }
 
     /**
