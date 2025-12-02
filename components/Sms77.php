@@ -3,7 +3,6 @@
 namespace humhub\modules\sms\components;
 
 use Yii;
-use humhub\models\Setting;
 
 /**
  * Seven implements the interface to the Seven Sms Provider Api.
@@ -21,7 +20,7 @@ class Sms77
     public function __construct()
     {
         $this->baseUrl = "https://gateway.seven.io/api/sms";
-        $this->apiKey = Setting::Get('apikey_sms77', 'sms');
+        $this->apiKey = Yii::$app->getModule('sms')->settings->get('apikey_sms77');
     }
 
     /**
