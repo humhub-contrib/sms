@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.9.0 (Unreleased)
+-----------------------
+- Enh #29: Changes for HumHub version 1.18 by rector
+
 0.8.1 (Unreleased)
 -----------------------
 - Fix #27: Replace deprecated module setting methods
