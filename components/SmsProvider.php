@@ -87,7 +87,7 @@ class SmsProvider
         }
         $normalized = preg_replace("/[^0-9|+]/", "", $number);
         $prefix = $normalized[0] == '+' ? "00" : "";
-        $normalized = $prefix . preg_replace("/[+]/", "", $normalized);
+        $normalized = $prefix . preg_replace("/[+]/", "", (string) $normalized);
         return $normalized;
     }
 

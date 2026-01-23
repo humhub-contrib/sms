@@ -64,7 +64,7 @@ class AnySms
         $values = [];
         foreach (explode("\n", $response) as $line) {
             $keyValuePair = explode(":", $line);
-            if (sizeof($keyValuePair) >= 2) {
+            if (count($keyValuePair) >= 2) {
                 $values[$keyValuePair[0]] = $keyValuePair[1];
             }
         }
@@ -72,38 +72,18 @@ class AnySms
         $retVal = [];
         $retVal['furtherInfo'] = $values;
         $retVal['error'] = $values['err'] != 0;
-        switch ($values['err']) {
-            case 0:
-                $retVal['statusMsg'] = Yii::t('SmsModule.base', 'SMS has been successfully sent.');
-                break;
-            case -1:
-                $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Invalid user id and/or password. Please contact an administrator to check the module configuration.');
-                break;
-            case -2:
-                $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Invalid IP address.');
-                break;
-            case -3:
-                $retVal['statusMsg'] = Yii::t('SmsModule.base', 'No sufficient credit available for sub-account.');
-                break;
-            case -4:
-                $retVal['statusMsg'] = Yii::t('SmsModule.base', 'No sufficient credit available for main-account.');
-                break;
-            case -5:
-                $retVal['statusMsg'] = Yii::t('SmsModule.base', 'SMS has been rejected/couldn\'t be delivered.');
-                break;
-            case -6:
-                $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Gateway isn\'t available for this network.');
-                break;
-            case -9:
-                $retVal['statusMsg'] = Yii::t('SmsModule.base', 'SMS with identical message text has been sent too often within the last 180 secondsSMS with identical message text has been sent too often within the last 180 seconds.');
-                break;
-            case -18:
-                $retVal['statusMsg'] = Yii::t('SmsModule.base', 'SMS is lacking indication of price (premium number ads).');
-                break;
-            default:
-                $retVal['statusMsg'] = Yii::t('SmsModule.base', 'An unknown error occurred.');
-                break;
-        }
+        $retVal['statusMsg'] = match ((int) $values['err']) {
+            0 => Yii::t('SmsModule.base', 'SMS has been successfully sent.'),
+            -1 => Yii::t('SmsModule.base', 'Invalid user id and/or password. Please contact an administrator to check the module configuration.'),
+            -2 => Yii::t('SmsModule.base', 'Invalid IP address.'),
+            -3 => Yii::t('SmsModule.base', 'No sufficient credit available for sub-account.'),
+            -4 => Yii::t('SmsModule.base', 'No sufficient credit available for main-account.'),
+            -5 => Yii::t('SmsModule.base', 'SMS has been rejected/couldn\'t be delivered.'),
+            -6 => Yii::t('SmsModule.base', 'Gateway isn\'t available for this network.'),
+            -9 => Yii::t('SmsModule.base', 'SMS with identical message text has been sent too often within the last 180 secondsSMS with identical message text has been sent too often within the last 180 seconds.'),
+            -18 => Yii::t('SmsModule.base', 'SMS is lacking indication of price (premium number ads).'),
+            default => Yii::t('SmsModule.base', 'An unknown error occurred.'),
+        };
 
         return $retVal;
     }

@@ -47,14 +47,14 @@ class Spryng
 
         $spryngSender = $sender;
         $spryngReceiver = $receiver;
-        if (!ctype_digit($sender)) {
-            $spryngSender = substr($sender, 0, 11);
+        if (!ctype_digit((string) $sender)) {
+            $spryngSender = substr((string) $sender, 0, 11);
         }
-        if (!ctype_digit($receiver) || substr($receiver, 0, 2) != "00") {
+        if (!ctype_digit((string) $receiver) || !str_starts_with((string) $receiver, "00")) {
             $retVal['error'] = true;
             $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Receiver is not properly formatted, has to be in international format, either 00[...], or +[...].');
         } else {
-            $spryngReceiver = substr($receiver, 1, strlen($receiver) - 2);
+            $spryngReceiver = substr((string) $receiver, 1, strlen((string) $receiver) - 2);
             $url = $this->generateUrl($spryngSender, $spryngReceiver, $msg);
             $handle = fopen($url, "rb");
             if ($handle == false) {
@@ -85,49 +85,20 @@ class Spryng
         if (empty($response)) {
             $retVal['statusMsg'] = Yii::t('SmsModule.base', 'An unknown error occurred.');
         } else {
-            switch ($response) {
-                case 1:
-                    $retVal['statusMsg'] = Yii::t('SmsModule.base', 'SMS has been successfully sent.');
-                    break;
-                case 101:
-                case 102:
-                case 103:
-                case 104:
-                    $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Invalid user id and/or password. Please contact an administrator to check the module configuration.');
-                    break;
-                case 105:
-                case 106:
-                    $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Invalid destination.');
-                    break;
-                case 107:
-                case 108:
-                    $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Invalid sender.');
-                    break;
-                case 109:
-                    $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Body too too short.');
-                    break;
-                case 110:
-                    $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Body too long.');
-                    break;
-                case 200:
-                    $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Security error. Please contact an administrator to check the module configuration.');
-                    break;
-                case 201:
-                    $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Unknown route.');
-                    break;
-                case 202:
-                    $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Route access violation.');
-                    break;
-                case 203:
-                    $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Insufficent credits.');
-                    break;
-                case 800:
-                    $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Technical error.');
-                    break;
-                default:
-                    $retVal['statusMsg'] = Yii::t('SmsModule.base', 'An unknown error occurred.');
-                    break;
-            }
+            $retVal['statusMsg'] = match ($response) {
+                1 => Yii::t('SmsModule.base', 'SMS has been successfully sent.'),
+                101, 102, 103, 104 => Yii::t('SmsModule.base', 'Invalid user id and/or password. Please contact an administrator to check the module configuration.'),
+                105, 106 => Yii::t('SmsModule.base', 'Invalid destination.'),
+                107, 108 => Yii::t('SmsModule.base', 'Invalid sender.'),
+                109 => Yii::t('SmsModule.base', 'Body too too short.'),
+                110 => Yii::t('SmsModule.base', 'Body too long.'),
+                200 => Yii::t('SmsModule.base', 'Security error. Please contact an administrator to check the module configuration.'),
+                201 => Yii::t('SmsModule.base', 'Unknown route.'),
+                202 => Yii::t('SmsModule.base', 'Route access violation.'),
+                203 => Yii::t('SmsModule.base', 'Insufficent credits.'),
+                800 => Yii::t('SmsModule.base', 'Technical error.'),
+                default => Yii::t('SmsModule.base', 'An unknown error occurred.'),
+            };
         }
 
         $retVal['furtherInfo'] = [$response => $retVal['statusMsg']];
@@ -152,8 +123,8 @@ class Spryng
             'BODY' => $msg,
         ];
         // for Spryng maxlength for alphanumeric sender values is 11
-        if (!ctype_digit($sender)) {
-            $params['SENDER'] = substr($sender, 0, 11);
+        if (!ctype_digit((string) $sender)) {
+            $params['SENDER'] = substr((string) $sender, 0, 11);
         }
         if (!empty($this->service)) {
             $params['SERVICE'] = $this->service;

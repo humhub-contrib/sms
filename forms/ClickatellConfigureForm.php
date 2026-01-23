@@ -55,12 +55,10 @@ class ClickatellConfigureForm extends SmsProviderConfigureForm
             return null;
         }
 
-        switch ($attributeName) {
-            case 'apiKey_clickatell':
-                return $activeForm->field($this, 'apiKey_clickatell')->textInput();
-            default:
-                return parent::getActiveFormElement($activeForm, $attributeName);
-        }
+        return match ($attributeName) {
+            'apiKey_clickatell' => $activeForm->field($this, 'apiKey_clickatell')->textInput(),
+            default => parent::getActiveFormElement($activeForm, $attributeName),
+        };
     }
 
 }

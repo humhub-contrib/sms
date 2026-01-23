@@ -58,15 +58,13 @@ class SmsProviderConfigureForm extends \yii\base\Model
             return null;
         }
 
-        switch ($attributeName) {
-            case 'provider':
-                return $activeForm->field($this, 'provider')->dropDownList(
-                    ['AnySms' => 'Any-SMS', 'Clickatell' => 'Clickatell', 'Spryng' => 'Spryng', 'Sms77' => 'Seven'],
-                    ['class' => 'form-control provider-select'],
-                );
-            default:
-                return null;
-        }
+        return match ($attributeName) {
+            'provider' => $activeForm->field($this, 'provider')->dropDownList(
+                ['AnySms' => 'Any-SMS', 'Clickatell' => 'Clickatell', 'Spryng' => 'Spryng', 'Sms77' => 'Seven'],
+                ['class' => 'form-control provider-select'],
+            ),
+            default => null,
+        };
     }
 
 }
