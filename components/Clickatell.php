@@ -53,7 +53,7 @@ class Clickatell
         $values = [];
         foreach (explode("\n", $response) as $line) {
             $keyValuePair = explode(":", $line);
-            if (sizeof($keyValuePair) >= 2) {
+            if (count($keyValuePair) >= 2) {
                 $values[$keyValuePair[0]] = $keyValuePair[1];
             }
         }
@@ -64,7 +64,7 @@ class Clickatell
         if (array_key_exists('ERR', $values)) {
             $retVal['error'] = true;
             $errorInfo = explode(", ", $values['ERR']);
-            if (sizeof($errorInfo) >= 2) {
+            if (count($errorInfo) >= 2) {
                 $retVal['statusMsg'] = $errorInfo[1];
             } else {
                 $retVal['statusMsg'] = $values['ERR'];

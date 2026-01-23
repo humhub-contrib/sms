@@ -16,7 +16,7 @@ use humhub\widgets\bootstrap\Alert;
             <strong>Status Message:</strong> <?= $response['statusMsg'] ?>
         <?php Alert::end() ?>
 
-        <?= Html::a('Back', $user->createUrl('/sms/send'), array('class' => 'btn btn-primary')); ?>
+        <?= Html::a('Back', $user->createUrl('/sms/send'), ['class' => 'btn btn-primary']); ?>
     </div>
 </div>
 <?php

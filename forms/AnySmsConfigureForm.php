@@ -67,18 +67,13 @@ class AnySmsConfigureForm extends SmsProviderConfigureForm
             return null;
         }
 
-        switch ($attributeName) {
-            case 'username_anysms':
-                return $activeForm->field($this, 'username_anysms')->textInput();
-            case 'password_anysms':
-                return $activeForm->field($this, 'password_anysms')->passwordInput();
-            case 'gateway_anysms':
-                return $activeForm->field($this, 'gateway_anysms')->textInput();
-            case 'test_anysms':
-                return $activeForm->field($this, 'test_anysms')->checkbox();
-            default:
-                return parent::getActiveFormElement($activeForm, $attributeName);
-        }
+        return match ($attributeName) {
+            'username_anysms' => $activeForm->field($this, 'username_anysms')->textInput(),
+            'password_anysms' => $activeForm->field($this, 'password_anysms')->passwordInput(),
+            'gateway_anysms' => $activeForm->field($this, 'gateway_anysms')->textInput(),
+            'test_anysms' => $activeForm->field($this, 'test_anysms')->checkbox(),
+            default => parent::getActiveFormElement($activeForm, $attributeName),
+        };
     }
 
 }

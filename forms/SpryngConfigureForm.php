@@ -65,20 +65,14 @@ class SpryngConfigureForm extends SmsProviderConfigureForm
             return null;
         }
 
-        switch ($attributeName) {
-            case 'username_spryng':
-                return $activeForm->field($this, 'username_spryng')->textInput();
-            case 'password_spryng':
-                return $activeForm->field($this, 'password_spryng')->passwordInput();
-            case 'route_spryng':
-                return $activeForm->field($this, 'route_spryng')->textInput();
-            case 'service_spryng':
-                return $activeForm->field($this, 'service_spryng')->textInput();
-            case 'allowlong_spryng':
-                return $activeForm->field($this, 'allowlong_spryng')->checkbox();
-            default:
-                return parent::getActiveFormElement($activeForm, $attributeName);
-        }
+        return match ($attributeName) {
+            'username_spryng' => $activeForm->field($this, 'username_spryng')->textInput(),
+            'password_spryng' => $activeForm->field($this, 'password_spryng')->passwordInput(),
+            'route_spryng' => $activeForm->field($this, 'route_spryng')->textInput(),
+            'service_spryng' => $activeForm->field($this, 'service_spryng')->textInput(),
+            'allowlong_spryng' => $activeForm->field($this, 'allowlong_spryng')->checkbox(),
+            default => parent::getActiveFormElement($activeForm, $attributeName),
+        };
     }
 
 }

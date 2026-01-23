@@ -54,12 +54,10 @@ class Sms77ConfigureForm extends SmsProviderConfigureForm
         if ($activeForm == null || $attributeName == null) {
             return null;
         }
-        switch ($attributeName) {
-            case 'apikey_sms77':
-                return $activeForm->field($this, 'apikey_sms77')->passwordInput();
-            default:
-                return parent::getActiveFormElement($activeForm, $attributeName);
-        }
+        return match ($attributeName) {
+            'apikey_sms77' => $activeForm->field($this, 'apikey_sms77')->passwordInput(),
+            default => parent::getActiveFormElement($activeForm, $attributeName),
+        };
     }
 
 }
