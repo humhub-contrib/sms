@@ -4,6 +4,7 @@ Changelog
 0.9.0 (Unreleased)
 -----------------------
 - Enh #29: Changes for HumHub version 1.18 by rector
+- Fix #31: Remove deprecations
 
 0.8.1 (Unreleased)
 -----------------------

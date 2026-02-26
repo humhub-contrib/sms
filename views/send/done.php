@@ -2,6 +2,7 @@
 
 use humhub\helpers\Html;
 use humhub\widgets\bootstrap\Alert;
+use humhub\widgets\bootstrap\Button;
 
 ?>
 
@@ -16,7 +17,8 @@ use humhub\widgets\bootstrap\Alert;
             <strong>Status Message:</strong> <?= $response['statusMsg'] ?>
         <?php Alert::end() ?>
 
-        <?= Html::a('Back', $user->createUrl('/sms/send'), ['class' => 'btn btn-primary']); ?>
+        <?= Button::primary(Yii::t('SmsModule.base', 'Back'))
+                ->link($user->createUrl('/sms/send')); ?>
     </div>
 </div>
 <?php
