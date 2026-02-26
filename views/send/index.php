@@ -1,6 +1,7 @@
 <?php
 
 use humhub\helpers\Html;
+use humhub\widgets\bootstrap\Button;
 use humhub\widgets\form\ActiveForm;
 
 /**
@@ -16,7 +17,7 @@ use humhub\widgets\form\ActiveForm;
     </div>
 
     <div class="panel-body">
-        <?php $form = ActiveForm::begin(); ?>
+        <?php $form = ActiveForm::begin() ?>
 
         <div class="mb-3">
             <?= $form->field($model, 'message')->textarea(['id' => 'sms']); ?>
@@ -27,9 +28,9 @@ use humhub\widgets\form\ActiveForm;
             </p>
         </div>
 
-        <?= Html::submitButton(Yii::t('SmsModule.base', 'Send'), ['class' => 'btn btn-primary']); ?>
+        <?= Button::save(Yii::t('SmsModule.base', 'Send'))->submit() ?>
 
-        <?php $form::end(); ?>
+        <?php ActiveForm::end() ?>
 
         <script <?= Html::nonce() ?>>
             // update limiter/ crop limiter text -> Stolen at: http://www.scriptiny.com/2012/09/jquery-input-textarea-limiter/
