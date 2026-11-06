@@ -23,7 +23,20 @@ class SmsProviderConfigureForm extends \yii\base\Model
     public function rules()
     {
         return [
-            ['provider', 'required'],
+            ['provider', 'in', 'range' => array_keys(self::getProviders())],
+        ];
+    }
+
+    /**
+     * @return array the available providers: class name => label
+     */
+    public static function getProviders(): array
+    {
+        return [
+            'AnySms' => 'Any-SMS',
+            'Clickatell' => 'Clickatell',
+            'Spryng' => 'Spryng',
+            'Sms77' => 'Seven',
         ];
     }
 
@@ -60,8 +73,8 @@ class SmsProviderConfigureForm extends \yii\base\Model
 
         return match ($attributeName) {
             'provider' => $activeForm->field($this, 'provider')->dropDownList(
-                ['AnySms' => 'Any-SMS', 'Clickatell' => 'Clickatell', 'Spryng' => 'Spryng', 'Sms77' => 'Seven'],
-                ['class' => 'form-control provider-select'],
+                self::getProviders(),
+                ['class' => 'form-control provider-select', 'prompt' => Yii::t('UserModule.profile', 'Please select:')],
             ),
             default => null,
         };

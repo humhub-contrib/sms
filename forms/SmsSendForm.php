@@ -13,7 +13,7 @@ class SmsSendForm extends \yii\base\Model
     {
         return [
             ['message', 'required'],
-            ['message', 'string', 'max' => 230],
+            ['message', 'string', 'max' => 160],
         ];
     }
 

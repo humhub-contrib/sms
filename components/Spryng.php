@@ -54,16 +54,13 @@ class Spryng
             $retVal['error'] = true;
             $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Receiver is not properly formatted, has to be in international format, either 00[...], or +[...].');
         } else {
-            $spryngReceiver = substr((string) $receiver, 1, strlen((string) $receiver) - 2);
+            // Spryng expects the international format without the leading "00"
+            $spryngReceiver = substr((string) $receiver, 2);
             $url = $this->generateUrl($spryngSender, $spryngReceiver, $msg);
-            $handle = fopen($url, "rb");
-            if ($handle == false) {
-                $retVal['error'] = true;
-                $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Could not open connection to SMS-Provider, please contact an administrator.');
-            } else {
-                $serverResponse = stream_get_contents($handle);
-                $retVal = $this->interpretResponse($serverResponse);
-            }
+            $serverResponse = HttpRequest::get($url);
+            $retVal = $serverResponse === null
+                ? HttpRequest::connectionError()
+                : $this->interpretResponse($serverResponse);
         }
         $retVal['sender'] = $spryngSender;
         $retVal['receiver'] = $spryngReceiver;
@@ -79,13 +76,15 @@ class Spryng
     private function interpretResponse($response)
     {
 
-        $retVal = [];
-        $retVal['error'] = $response != 1;
+        $response = trim($response);
 
-        if (empty($response)) {
+        $retVal = [];
+        $retVal['error'] = $response !== '1';
+
+        if ($response === '') {
             $retVal['statusMsg'] = Yii::t('SmsModule.base', 'An unknown error occurred.');
         } else {
-            $retVal['statusMsg'] = match ($response) {
+            $retVal['statusMsg'] = match (is_numeric($response) ? (int) $response : null) {
                 1 => Yii::t('SmsModule.base', 'SMS has been successfully sent.'),
                 101, 102, 103, 104 => Yii::t('SmsModule.base', 'Invalid user id and/or password. Please contact an administrator to check the module configuration.'),
                 105, 106 => Yii::t('SmsModule.base', 'Invalid destination.'),

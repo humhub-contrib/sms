@@ -40,16 +40,11 @@ class AnySms
     public function sendSms($sender, $receiver, $msg)
     {
         $url = $this->generateUrl($sender, $receiver, $msg);
-        $handle = fopen($url, "rb");
-        $retVal = [];
-        if ($handle == false) {
-            $retVal['error'] = true;
-            $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Could not open connection to SMS-Provider, please contact an administrator.');
-        } else {
-            $serverResponse = stream_get_contents($handle);
-            $retVal = $this->interpretResponse($serverResponse);
-        }
-        return $retVal;
+        $serverResponse = HttpRequest::get($url);
+
+        return $serverResponse === null
+            ? HttpRequest::connectionError()
+            : $this->interpretResponse($serverResponse);
     }
 
     /**
@@ -71,8 +66,9 @@ class AnySms
 
         $retVal = [];
         $retVal['furtherInfo'] = $values;
-        $retVal['error'] = $values['err'] != 0;
-        $retVal['statusMsg'] = match ((int) $values['err']) {
+        $errorCode = (int) ($values['err'] ?? 1);
+        $retVal['error'] = !isset($values['err']) || $errorCode !== 0;
+        $retVal['statusMsg'] = match (isset($values['err']) ? $errorCode : null) {
             0 => Yii::t('SmsModule.base', 'SMS has been successfully sent.'),
             -1 => Yii::t('SmsModule.base', 'Invalid user id and/or password. Please contact an administrator to check the module configuration.'),
             -2 => Yii::t('SmsModule.base', 'Invalid IP address.'),

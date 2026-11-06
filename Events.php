@@ -9,6 +9,7 @@
 namespace humhub\modules\sms;
 
 use humhub\helpers\ControllerHelper;
+use humhub\modules\sms\permissions\SendSms;
 use humhub\modules\ui\menu\MenuLink;
 use humhub\modules\user\widgets\ProfileMenu;
 use Yii;
@@ -20,7 +21,10 @@ class Events
         /* @var ProfileMenu $menu */
         $menu = $event->sender;
 
-        if (Yii::$app->hasModule('sms')) {
+        /* @var Module|null $module */
+        $module = Yii::$app->getModule('sms');
+
+        if ($module !== null && $module->isConfigured() && SendSms::isAllowed() && $module->getUserMobile($menu->user) !== null) {
             $menu->addEntry(new MenuLink([
                 'label' => Yii::t('SmsModule.base', 'Send SMS'),
                 'icon' => 'mobile',

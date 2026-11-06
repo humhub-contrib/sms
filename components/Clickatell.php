@@ -29,16 +29,11 @@ class Clickatell
     public function sendSms($sender, $receiver, $msg)
     {
         $url = $this->generateUrl($sender, $receiver, $msg);
-        $handle = fopen($url, "rb");
-        $retVal = [];
-        if ($handle == false) {
-            $retVal['error'] = true;
-            $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Could not open connection to SMS-Provider, please contact an administrator.');
-        } else {
-            $serverResponse = stream_get_contents($handle);
-            $retVal = $this->interpretResponse($serverResponse);
-        }
-        return $retVal;
+        $serverResponse = HttpRequest::get($url);
+
+        return $serverResponse === null
+            ? HttpRequest::connectionError()
+            : $this->interpretResponse($serverResponse);
     }
 
     /**
@@ -69,7 +64,7 @@ class Clickatell
             } else {
                 $retVal['statusMsg'] = $values['ERR'];
             }
-        } elseif (array_key_exists('ID')) {
+        } elseif (array_key_exists('ID', $values)) {
             $retVal['error'] = false;
             $retVal['statusMsg'] = Yii::t('SmsModule.base', 'SMS has been successfully sent.');
         } else {
