@@ -66,8 +66,8 @@ class SpryngConfigureForm extends SmsProviderConfigureForm
         }
 
         return match ($attributeName) {
-            'username_spryng' => $activeForm->field($this, 'username_spryng')->textInput(),
-            'password_spryng' => $activeForm->field($this, 'password_spryng')->passwordInput(),
+            'username_spryng' => $activeForm->field($this, 'username_spryng')->textInput(['autocomplete' => 'off']),
+            'password_spryng' => $activeForm->field($this, 'password_spryng')->passwordInput(['autocomplete' => 'new-password']),
             'route_spryng' => $activeForm->field($this, 'route_spryng')->textInput(),
             'service_spryng' => $activeForm->field($this, 'service_spryng')->textInput(),
             'allowlong_spryng' => $activeForm->field($this, 'allowlong_spryng')->checkbox(),

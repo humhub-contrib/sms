@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.9.1 (Unreleased)
+------------------
+- Fix #33: Send SMS permission, provider connection errors, Spryng number and Clickatell result, escaped output, provider selection without saving
+
 0.9.0 (July 8, 2026)
 --------------------
 - Enh #29: Changes for HumHub version 1.18 by rector

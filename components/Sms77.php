@@ -29,16 +29,11 @@ class Sms77
     public function sendSms($sender, $receiver, $msg)
     {
         $url = $this->generateUrl($sender, $receiver, $msg);
-        $handle = fopen($url, "rb");
-        $retVal = [];
-        if ($handle == false) {
-            $retVal['error'] = true;
-            $retVal['statusMsg'] = Yii::t('SmsModule.base', 'Could not open connection to SMS-Provider, please contact an administrator.');
-        } else {
-            $serverResponse = stream_get_contents($handle);
-            $retVal = $this->interpretResponse($serverResponse);
-        }
-        return $retVal;
+        $serverResponse = HttpRequest::get($url);
+
+        return $serverResponse === null
+            ? HttpRequest::connectionError()
+            : $this->interpretResponse($serverResponse);
     }
 
     /**
@@ -50,8 +45,15 @@ class Sms77
     private function interpretResponse($response)
     {
         $json = json_decode($response, true);
+        if (!is_array($json)) {
+            return [
+                'error' => true,
+                'furtherInfo' => [],
+                'statusMsg' => Yii::t('SmsModule.base', 'An unknown error occurred.'),
+            ];
+        }
 
-        switch ((int)$json['success']) {
+        switch ((int) ($json['success'] ?? 0)) {
             case 100:
                 $success = true;
                 $msg = 'SMS has been successfully sent.';
@@ -101,7 +103,7 @@ class Sms77
         }
 
         $i = 1;
-        foreach ($json['messages'] as $message) {
+        foreach ($json['messages'] ?? [] as $message) {
             foreach ($message as $key => $value) {
                 $json['message_' . $i . '_' . $key]
                     = is_array($value) ? implode(',', $value) : $value;

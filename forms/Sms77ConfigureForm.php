@@ -55,7 +55,7 @@ class Sms77ConfigureForm extends SmsProviderConfigureForm
             return null;
         }
         return match ($attributeName) {
-            'apikey_sms77' => $activeForm->field($this, 'apikey_sms77')->passwordInput(),
+            'apikey_sms77' => $activeForm->field($this, 'apikey_sms77')->passwordInput(['autocomplete' => 'new-password']),
             default => parent::getActiveFormElement($activeForm, $attributeName),
         };
     }

@@ -3,6 +3,7 @@
 use humhub\helpers\Html;
 use humhub\widgets\bootstrap\Alert;
 use humhub\widgets\bootstrap\Button;
+use yii\helpers\Json;
 
 ?>
 
@@ -12,9 +13,9 @@ use humhub\widgets\bootstrap\Button;
     </div>
     <div class="panel-body">
         <?php Alert::beginInstance($response['error'] == false ? 'success' : 'danger')->closeButton(false) ?>
-            <strong>From:</strong>           <?= $response['sender'] ?><br>
-            <strong>To:</strong>             <?= $response['receiver'] ?><br>
-            <strong>Status Message:</strong> <?= $response['statusMsg'] ?>
+            <strong>From:</strong>           <?= Html::encode($response['sender']) ?><br>
+            <strong>To:</strong>             <?= Html::encode($response['receiver']) ?><br>
+            <strong>Status Message:</strong> <?= Html::encode($response['statusMsg']) ?>
         <?php Alert::end() ?>
 
         <?= Button::primary(Yii::t('SmsModule.base', 'Back'))
@@ -23,13 +24,8 @@ use humhub\widgets\bootstrap\Button;
 </div>
 <?php
 if ($debug && array_key_exists('furtherInfo', $response)) {
-    $infoString = 'Further Information: { \n';
-    foreach ($response['furtherInfo'] as $key => $line) {
-        $infoString .= '\t' . $key . ': ' . $line . '\n';
-    }
-    $infoString .= '}';
     ?>
     <script <?= Html::nonce() ?>>
-        console.log("<?= $infoString ?>");
+        console.log('Further Information:', <?= Json::htmlEncode($response['furtherInfo']) ?>);
     </script>
 <?php } ?>
